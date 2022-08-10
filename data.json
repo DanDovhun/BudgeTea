@@ -1,0 +1,10 @@
+{
+    "groceries": [
+        {
+            "category": "Groceries",
+            "price": 4
+        }
+    ],
+    "travel": null,
+    "others": null
+}
