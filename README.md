@@ -13,3 +13,9 @@ A basic spending tracker written in GoLang.
 
 ### Install Fyne
 [Install from fyne.io](https://fyne.io/)
+
+## Install and build
+- Clone this repository
+- Open that hacker thing (Terminal)
+- Enter '''cd path/to/the/BudgetManager'''
+- Finally, just enter '''go build'''
