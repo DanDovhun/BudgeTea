@@ -18,7 +18,7 @@ A basic spending tracker written in GoLang.
 - Clone this repository
 - Open that hacker thing (Terminal)
 - Enter 
-'''
+```
 $ cd path/to/the/BudgetManager
 $ go build
-'''
+```
