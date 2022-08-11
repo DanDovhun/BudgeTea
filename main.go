@@ -103,29 +103,32 @@ func SeeExpenses(a fyne.App, h fyne.Window) {
 	if err != nil {
 		content = container.NewVBox(widget.NewLabel(err.Error()))
 	} else {
-		title = fmt.Sprintf("Expenses for %v %v", exp.Month, exp.Year)
+		info, _ := data.GetAll()
+
+		ttl := widget.NewLabel(fmt.Sprintf("Expenses for %v %v", exp.Month, exp.Year))
+		budget := widget.NewLabel("")
+
+		if exp.TotalExpenses > info.Budget {
+			budget.SetText(fmt.Sprintf("Budget: %v SEK (%v SEK over budget)", info.Budget, exp.TotalExpenses-info.Budget))
+		} else {
+			budget.SetText(fmt.Sprintf("Budget: %v SEK (%v SEK under budget)", info.Budget, info.Budget-exp.TotalExpenses))
+		}
 
 		totalExpenses := widget.NewLabel(fmt.Sprintf("Total Expenses: %v SEK", exp.TotalExpenses))
-		totalExpenses.Alignment = fyne.TextAlign(fyne.OrientationHorizontalRight)
 
 		groceriesExpenses := widget.NewLabel(fmt.Sprintf("Groceries Expenses: %v SEK (%v", exp.GroceriesExpenses, funcs.Round(100*exp.GroceriesExpenses/exp.TotalExpenses, 2)) + "%)")
-		groceriesExpenses.Alignment = fyne.TextAlign(fyne.OrientationHorizontalRight)
-
 		travelExpenses := widget.NewLabel(fmt.Sprintf("Groceries Expenses: %v SEK (%v", exp.TravelExpenses, funcs.Round(100*exp.TravelExpenses/exp.TotalExpenses, 2)) + "%)")
-		travelExpenses.Alignment = fyne.TextAlign(fyne.OrientationHorizontalRight)
-
 		otherExpenses := widget.NewLabel(fmt.Sprintf("Groceries Expenses: %v SEK (%v", exp.OtherExpenses, funcs.Round(100*exp.OtherExpenses/exp.TotalExpenses, 2)) + "%)")
-		otherExpenses.Alignment = fyne.TextAlign(fyne.OrientationHorizontalRight)
-
-		info, err := data.GetAll()
 
 		content = container.NewVBox(
+			ttl,
+			budget,
 			totalExpenses,
 			groceriesExpenses,
 			travelExpenses,
 			otherExpenses,
 
-			widget.NewButton("Export individual expenses as csv", func() {
+			widget.NewButton("Export individual expenses as CSV", func() {
 				newWin := a.NewWindow("Export individual expenses")
 
 				fileName := widget.NewEntry()
@@ -222,6 +225,58 @@ func SeeExpenses(a fyne.App, h fyne.Window) {
 	win.Show()
 }
 
+func SetBudget(a fyne.App, h fyne.Window) {
+	title := "Set Budget"
+	win := a.NewWindow(title)
+
+	info, err := data.GetAll()
+
+	if err != nil {
+		ErrorMessage(a, win, err.Error())
+		return
+	}
+
+	h.Hide()
+	win.SetMaster()
+
+	entry := widget.NewEntry()
+	entry.SetPlaceHolder("Budget (SEK)")
+	entry.SetText(fmt.Sprintf("%v", info.Budget))
+
+	content := container.NewVBox(
+		entry,
+		widget.NewButton("Set budget", func() {
+			budget, err := strconv.ParseFloat(entry.Text, 64)
+
+			if err != nil && budget > 0 {
+				ErrorMessage(a, win, "Please only enter numbers")
+				return
+			}
+
+			if budget <= 0 {
+				ErrorMessage(a, win, "Budget cannot be less or equal to zero")
+				return
+			}
+
+			e := data.UpdateBudget(budget)
+
+			if e == nil {
+				ErrorMessage(a, win, "Succesfully set budget to "+fmt.Sprintf("%v", budget))
+			}
+		}),
+
+		widget.NewButton("Home", func() {
+			h.Show()
+			h.SetMaster()
+			win.Hide()
+		}),
+	)
+
+	win.Resize(fyne.NewSize(260, 100))
+	win.SetContent(content)
+	win.Show()
+}
+
 func main() {
 	a := app.New()
 	w := a.NewWindow("Budget Manager")
@@ -234,6 +289,7 @@ func main() {
 		title,
 		widget.NewButton("Add an expense", func() { AddExpenses(a, w) }),
 		widget.NewButton("See expenses", func() { SeeExpenses(a, w) }),
+		widget.NewButton("Set Budget", func() { SetBudget(a, w) }),
 	))
 
 	w.Resize(fyne.NewSize(250, 100))

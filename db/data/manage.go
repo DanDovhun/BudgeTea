@@ -129,6 +129,26 @@ func GetAll() (Data, error) {
 	return items, nil
 }
 
+func UpdateBudget(budget float64) error {
+	file, err := os.Open("db/data/data.json")
+
+	if err != nil {
+		return errors.New("Cannot update budget")
+	}
+
+	var info Data
+	byteValue, _ := ioutil.ReadAll(file)
+
+	json.Unmarshal(byteValue, &info)
+
+	info.Budget = budget
+
+	j, _ := json.MarshalIndent(info, "", "    ")
+	_ = ioutil.WriteFile("db/data/data.json", j, 0644)
+
+	return nil
+}
+
 func GetAllMonthlyExpenses() ([]MonthlyExpense, error) {
 	data, err := GetAll()
 
