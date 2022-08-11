@@ -22,3 +22,6 @@ A basic spending tracker written in GoLang.
 $ cd path/to/the/BudgetManager
 $ make build
 ```
+
+# Binaries
+There are binaries for Windows and Linux in the <i>bin</i> folder
