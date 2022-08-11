@@ -20,5 +20,5 @@ A basic spending tracker written in GoLang.
 - Enter 
 ```
 $ cd path/to/the/BudgetManager
-$ go build
+$ make build
 ```
