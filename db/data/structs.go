@@ -23,6 +23,7 @@ type Category struct {
 }
 
 type Data struct {
+	Budget     float64
 	TotalPrice float64          `json:"total_price"`
 	Groceries  Category         `json:"groceries"`
 	Travel     Category         `json:"travel"`
