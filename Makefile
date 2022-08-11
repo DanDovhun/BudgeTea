@@ -1,5 +1,5 @@
 build:
-	go build
+	go build -o ~/Desktop/BudgetManager/bin
 
 run:
 	go run main.go
