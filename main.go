@@ -101,7 +101,14 @@ func SeeExpenses(a fyne.App, h fyne.Window) {
 	content := container.NewVBox()
 
 	if err != nil {
-		content = container.NewVBox(widget.NewLabel(err.Error()))
+		content = container.NewVBox(container.NewVBox(
+			widget.NewLabel(err.Error()),
+			widget.NewButton("Home", func() {
+				win.Hide()
+				h.Show()
+				h.SetMaster()
+			}),
+		))
 	} else {
 		info, _ := data.GetAll()
 

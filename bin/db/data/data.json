@@ -1,17 +1,9 @@
 {
     "Budget": 500,
-    "total_price": 45,
+    "total_price": 0,
     "groceries": {
-        "total_price": 45,
-        "items": [
-            {
-                "category": "Groceries",
-                "price": 45,
-                "year": 2022,
-                "month": "Aug",
-                "day": 11
-            }
-        ]
+        "total_price": 0,
+        "items": null
     },
     "travel": {
         "total_price": 0,
@@ -21,14 +13,5 @@
         "total_price": 0,
         "items": null
     },
-    "monthly_expenses": [
-        {
-            "year": 2022,
-            "month": "Aug",
-            "total_expenses": 45,
-            "groceries_expenses": 45,
-            "travel_expenses": 0,
-            "other_expenses": 0
-        }
-    ]
+    "monthly_expenses": null
 }
