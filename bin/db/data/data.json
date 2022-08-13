@@ -1,17 +1,71 @@
 {
-    "Budget": 500,
-    "total_price": 0,
+    "Budget": 5000,
+    "total_price": 884,
     "groceries": {
-        "total_price": 0,
-        "items": null
+        "total_price": 480,
+        "items": [
+            {
+                "category": "Groceries",
+                "price": 320,
+                "year": 2022,
+                "month": "Aug",
+                "day": 13
+            },
+            {
+                "category": "Groceries",
+                "price": 160,
+                "year": 2022,
+                "month": "Aug",
+                "day": 13
+            }
+        ]
     },
     "travel": {
-        "total_price": 0,
-        "items": null
+        "total_price": 154,
+        "items": [
+            {
+                "category": "Travel",
+                "price": 119,
+                "year": 2022,
+                "month": "Aug",
+                "day": 13
+            },
+            {
+                "category": "Travel",
+                "price": 35,
+                "year": 2022,
+                "month": "Aug",
+                "day": 13
+            }
+        ]
     },
     "others": {
-        "total_price": 0,
-        "items": null
+        "total_price": 250,
+        "items": [
+            {
+                "category": "Others",
+                "price": 160,
+                "year": 2022,
+                "month": "Aug",
+                "day": 13
+            },
+            {
+                "category": "Others",
+                "price": 90,
+                "year": 2022,
+                "month": "Aug",
+                "day": 13
+            }
+        ]
     },
-    "monthly_expenses": null
+    "monthly_expenses": [
+        {
+            "year": 2022,
+            "month": "Aug",
+            "total_expenses": 884,
+            "groceries_expenses": 480,
+            "travel_expenses": 154,
+            "other_expenses": 250
+        }
+    ]
 }

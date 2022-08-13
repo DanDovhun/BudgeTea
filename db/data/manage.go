@@ -101,7 +101,7 @@ func Add(price float64, category string) error {
 	case "Others":
 		items.Others.Items = append(items.Others.Items, item)
 		items.Others.Price += price
-		items.Expenses[monthlyExpenseIndex].TravelExpenses += price
+		items.Expenses[monthlyExpenseIndex].OtherExpenses += price
 	}
 
 	items.TotalPrice += price
