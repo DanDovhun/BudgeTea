@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'all'.  Stop.
-
 # GNU Make 4.3
 # Built for x86_64-redhat-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat Aug 13 19:01:39 2022
+# Make data base, printed on Sat Aug 20 01:08:32 2022
 
 # Variables
 
@@ -19,6 +17,8 @@ LC_ALL = C
 # environment
 NO_AT_BRIDGE = 1
 # environment
+GJS_DEBUG_OUTPUT = stderr
+# environment
 VSCODE_CWD = /home/daniel
 # environment
 GDM_LANG = en_US.UTF-8
@@ -26,6 +26,12 @@ GDM_LANG = en_US.UTF-8
 MAKE_COMMAND := make
 # environment
 GOPATH = /home/daniel/go
+# environment
+define BASH_FUNC_which%%
+() {  ( alias;
+ eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+}
+endef
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
@@ -37,7 +43,7 @@ PWD = /home/daniel/Desktop/BudgetManager
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
-HOSTNAME = sagemcom.ip
+HOSTNAME = fedora
 # environment
 MAIL = /var/spool/mail/daniel
 # environment
@@ -53,7 +59,7 @@ VSCODE_CODE_CACHE_PATH = /home/daniel/.config/Code/CachedData/da76f93349a72022ca
 # environment
 LANG = C
 # environment
-XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.6SBXQ1
+XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.UT3RQ1
 # default
 .LOADED := 
 # default
@@ -87,13 +93,13 @@ MAKEFILE_LIST := Makefile
 # automatic
 @F = $(notdir $@)
 # environment
-VSCODE_PID = 3992
+VSCODE_PID = 52885
 # environment
 XDG_SESSION_TYPE = wayland
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-SESSION_MANAGER = local/unix:@/tmp/.ICE-unix/2181,unix/unix:/tmp/.ICE-unix/2181
+SESSION_MANAGER = local/unix:@/tmp/.ICE-unix/2077,unix/unix:/tmp/.ICE-unix/2077
 # automatic
 *F = $(notdir $*)
 # environment
@@ -113,13 +119,15 @@ MAKECMDGOALS := all
 # environment
 XMODIFIERS = @im=ibus
 # environment
-SHLVL = 1
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+# environment
+SHLVL = 0
 # environment
 MAKELEVEL := 0
 # default
 MAKE = $(MAKE_COMMAND)
 # environment
-PATH = ~/Desktop/BudgetManager/sonar-scanner-4.7.0.2747-linux/bin:/home/daniel/.local/bin:/home/daniel/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/var/lib/snapd/snap/bin
+PATH = ~/Desktop/BudgetManager/sonar-scanner-4.7.0.2747-linux/bin:~/Desktop/BudgetManager/sonar-scanner-4.7.0.2747-linux/bin:/home/daniel/.local/bin:/home/daniel/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/var/lib/snapd/snap/bin
 # environment
 QTDIR = /usr/lib64/qt-3.3
 # default
@@ -127,7 +135,7 @@ MAKEFILES :=
 # automatic
 ^F = $(notdir $^)
 # environment
-INVOCATION_ID = ea02c1a11ab34114b18213ad3ae47cab
+INVOCATION_ID = 9b315ced400d487c9926eb9b8dd8ecd5
 # environment
 USERNAME = daniel
 # environment
@@ -150,10 +158,12 @@ ORIGINAL_XDG_CURRENT_DESKTOP = GNOME
 GNUMAKEFLAGS := 
 # environment
 LOGNAME = daniel
+# environment
+GIO_LAUNCHED_DESKTOP_FILE = /usr/share/applications/code.desktop
 # makefile
 .DEFAULT_GOAL := build
 # environment
-SYSTEMD_EXEC_PID = 2536
+SYSTEMD_EXEC_PID = 2129
 # environment
 HISTCONTROL = ignoredups
 # environment
@@ -165,13 +175,13 @@ USER = daniel
 # default
 MAKE_VERSION := 4.3
 # environment
-MANAGERPID = 2060
+MANAGERPID = 1970
 # environment
 which_declare = declare -f
 # environment
 DEBUGINFOD_URLS = https://debuginfod.fedoraproject.org/ 
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 3972
+GIO_LAUNCHED_DESKTOP_FILE_PID = 52885
 # environment
 _ = /usr/bin/make
 # environment
@@ -179,7 +189,7 @@ XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GOMODCACHE = /home/daniel/go/pkg/mod
 # environment
-JOURNAL_STREAM = 8:38739
+JOURNAL_STREAM = 8:34340
 # environment
 XDG_SESSION_CLASS = user
 # environment
@@ -200,10 +210,6 @@ GOPROXY = direct
 <F = $(notdir $<)
 # default
 SUFFIXES := 
-# environment
-VSCODE_CLI = 1
-# environment
-ELECTRON_NO_ATTACH_CONSOLE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink guile load
 # environment
@@ -211,7 +217,7 @@ XDG_MENU_PREFIX = gnome-
 # environment
 GDMSESSION = gnome
 # variable set hash-table stats:
-# Load=99/1024=10%, Rehash=0, Collisions=4/129=3%
+# Load=101/1024=10%, Rehash=0, Collisions=5/131=4%
 
 # Pattern-specific Variable Values
 
@@ -232,7 +238,7 @@ GDMSESSION = gnome
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-12 00:22:04.34386308
+#  Last modified 2022-08-13 19:06:00.323197777
 #  File has been updated.
 #  Successfully updated.
 
@@ -284,8 +290,9 @@ build-and-run:
 
 # strcache performance: lookups = 32 / hit rate = 21%
 # hash-table stats:
- 
 # Load=25/8192=0%, Rehash=0, Collisions=0/32=0%
-# Finished Make data base on Sat Aug 13 19:01:39 2022
+# Finished Make data base on Sat Aug 20 01:08:32 2022
 
  
+make: *** No rule to make target 'all'.  Stop.
+
