@@ -101,7 +101,14 @@ func SeeExpenses(a fyne.App, h fyne.Window) {
 	content := container.NewVBox()
 
 	if err != nil {
-		content = container.NewVBox(widget.NewLabel(err.Error()))
+		content = container.NewVBox(container.NewVBox(
+			widget.NewLabel(err.Error()),
+			widget.NewButton("Home", func() {
+				win.Hide()
+				h.Show()
+				h.SetMaster()
+			}),
+		))
 	} else {
 		info, _ := data.GetAll()
 
@@ -114,11 +121,13 @@ func SeeExpenses(a fyne.App, h fyne.Window) {
 			budget.SetText(fmt.Sprintf("Budget: %v SEK (%v SEK under budget)", info.Budget, info.Budget-exp.TotalExpenses))
 		}
 
+		fmt.Println(info.Others.Price)
+
 		totalExpenses := widget.NewLabel(fmt.Sprintf("Total Expenses: %v SEK", exp.TotalExpenses))
 
 		groceriesExpenses := widget.NewLabel(fmt.Sprintf("Groceries Expenses: %v SEK (%v", exp.GroceriesExpenses, funcs.Round(100*exp.GroceriesExpenses/exp.TotalExpenses, 2)) + "%)")
-		travelExpenses := widget.NewLabel(fmt.Sprintf("Groceries Expenses: %v SEK (%v", exp.TravelExpenses, funcs.Round(100*exp.TravelExpenses/exp.TotalExpenses, 2)) + "%)")
-		otherExpenses := widget.NewLabel(fmt.Sprintf("Groceries Expenses: %v SEK (%v", exp.OtherExpenses, funcs.Round(100*exp.OtherExpenses/exp.TotalExpenses, 2)) + "%)")
+		travelExpenses := widget.NewLabel(fmt.Sprintf("Travel Expenses: %v SEK (%v", exp.TravelExpenses, funcs.Round(100*exp.TravelExpenses/exp.TotalExpenses, 2)) + "%)")
+		otherExpenses := widget.NewLabel(fmt.Sprintf("Other Expenses: %v SEK (%v", exp.OtherExpenses, funcs.Round(100*exp.OtherExpenses/exp.TotalExpenses, 2)) + "%)")
 
 		content = container.NewVBox(
 			ttl,
