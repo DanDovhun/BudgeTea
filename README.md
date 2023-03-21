@@ -29,14 +29,14 @@ User will be able to enter:
 ### See Expenses:
 The user will be able to see how much money they spent this month, whether they are under or above their selected budget and how much. 
 Here the user can also choose whether they want to download their expense report either for a specific month or all time expense report. Individual expenses 
-will be seen in these reports.
+will be seen in these reports. When creating a report all expenses will be converted into the denomination set in the **Preferences** section.
 
 ### Preferences:
 The user will be able to edit their budget and preferred denomination.
 
 ## Entity Relationship Diagram
 Diagram showing between multiple entities in the database
-
+![ER Diagram](images/ER%20Diagram.drawio(1).png)
 
 ## Tools:
 The backend of BudgeTea is built using Go with Fyne as the front end library. BudgeTea is also using JSON to store data.
