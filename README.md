@@ -45,3 +45,22 @@ The backend of BudgeTea is built using Go with Fyne as the front end library. Bu
 Binaries (executable files) for Windows and Linux will be found in the ***binaries*** folder
 
 ## Build
+### Prerequisits:
+- Download [GoLang](https://go.dev/dl/)
+- Download and setup [Fyne](https://developer.fyne.io/started/)
+
+### Steps:
+1. Clone BudgeTea
+   Either download it as zip or run `git clone https://github.com/DanDovhun/BudgetManager.git` in your terminal/command line
+
+2. Navigate into the directory
+   Using your command line run `cd /path/to/BudgeTea`
+
+3. Make sure that all dependencies are set up properly
+   Execute these 3 commands:
+   'go get fyne.io/fyne/v2'
+	 'go get fyne.io/fyne/v2/cmd/fyne'
+	 'go mod tidy'
+
+4. Build
+   Run the command `go build`, after which an executable file named BudgeTea (on Linux/MacOS) or BudgeTea.exe shall appear in the same directory.

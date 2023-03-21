@@ -1,4 +1,4 @@
-module Budgetie
+module BudgeTea
 
 go 1.19
 
