@@ -20,7 +20,7 @@ User will be able to enter:
   - Travel
   - Hobbies
   - Miscelanious 
-- Price (in a selected denomination)
+- Price (in a supported denomination)
   - Supported denominations:
     - Swedish Crown (SEK)
     - Euros (EUR)
@@ -28,8 +28,7 @@ User will be able to enter:
 
 ### See Expenses:
 The user will be able to see how much money they spent this month, whether they are under or above their selected budget and how much. 
-Here the user can also choose whether they want to download their expense report either for a specific month or all time expense report. Individual expenses 
-will be seen in these reports. When creating a report all expenses will be converted into the denomination set in the **Preferences** section.
+Here the user can also choose whether they want to download their expense report either for a specific month or all time expense report. Individual expenses will be seen in these reports. When creating a report all expenses will be converted into the denomination set in the **Preferences** section.
 
 ### Preferences:
 The user will be able to edit their budget and preferred denomination.
