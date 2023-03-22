@@ -12,11 +12,11 @@ import (
 func ExpenseAdditionWindow(root fyne.App, home fyne.Window) {
 	var denomination, category string
 
-	window := root.NewWindow("Add New Expense - Budgetie")
+	window := root.NewWindow("Add New Expense - BudgeTea")
 	window.SetMaster()
 	home.Hide()
 
-	label := widget.NewLabel("Budgetie")
+	label := widget.NewLabel("BudgeTea")
 	label.Alignment = fyne.TextAlignCenter
 	label.TextStyle = fyne.TextStyle{Bold: true}
 
@@ -61,6 +61,12 @@ func ExpenseAdditionWindow(root fyne.App, home fyne.Window) {
 		widget.NewButton("Submit", func() {
 			fmt.Println(denomination)
 			fmt.Println(category)
+		}),
+
+		widget.NewButton("Back", func() {
+			home.SetMaster()
+			home.Show()
+			window.Hide()
 		}),
 	))
 	window.Resize(fyne.NewSize(400, 200))

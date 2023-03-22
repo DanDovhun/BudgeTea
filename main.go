@@ -1,3 +1,7 @@
+// BudgeTea, (C) Daniel Dovhun
+// Simple budgetting tool built with Go
+// Version 0.0.2
+
 package main
 
 import (
@@ -11,9 +15,9 @@ import (
 
 func main() {
 	root := app.New()
-	home := root.NewWindow("Budgetie")
+	home := root.NewWindow("BudgeTea")
 
-	label := widget.NewLabel("Budgetie")
+	label := widget.NewLabel("BudgeTea")
 	label.Alignment = fyne.TextAlignCenter
 	label.TextStyle = fyne.TextStyle{Bold: true}
 
@@ -23,7 +27,9 @@ func main() {
 		widget.NewButton("Add an Expense", func() {
 			layouts.ExpenseAdditionWindow(root, home)
 		}),
-		widget.NewButton("Expense Report", func() {}),
+		widget.NewButton("Expense Report", func() {
+			layouts.ViewExpensesLayout(root, home)
+		}),
 		widget.NewButton("Preferences", func() {}),
 	))
 
