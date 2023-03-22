@@ -5,6 +5,8 @@ import (
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/container"
 	"fyne.io/fyne/widget"
+
+	"BudgeTea/layouts"
 )
 
 func main() {
@@ -12,11 +14,19 @@ func main() {
 	home := root.NewWindow("Budgetie")
 
 	label := widget.NewLabel("Budgetie")
-	label.Position()
+	label.Alignment = fyne.TextAlignCenter
+	label.TextStyle = fyne.TextStyle{Bold: true}
 
 	home.SetContent(container.NewVBox(
 		label,
+
+		widget.NewButton("Add an Expense", func() {
+			layouts.ExpenseAdditionWindow(root, home)
+		}),
+		widget.NewButton("Expense Report", func() {}),
+		widget.NewButton("Preferences", func() {}),
 	))
+
 	home.Resize(fyne.NewSize(400, 200))
 	home.ShowAndRun()
 }
