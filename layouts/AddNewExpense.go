@@ -62,6 +62,12 @@ func ExpenseAdditionWindow(root fyne.App, home fyne.Window) {
 			fmt.Println(denomination)
 			fmt.Println(category)
 		}),
+
+		widget.NewButton("Home", func() {
+			home.SetMaster()
+			home.Show()
+			window.Hide()
+		}),
 	))
 	window.Resize(fyne.NewSize(400, 200))
 	window.Show()
