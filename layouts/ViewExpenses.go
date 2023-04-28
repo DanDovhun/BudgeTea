@@ -31,6 +31,7 @@ func pastMonthReport(root fyne.App, home fyne.Window) {
 		widget.NewButton("Submit", func() {}),
 	))
 
+	window.Resize(fyne.NewSize(400, 150))
 	window.Show()
 }
 
@@ -46,6 +47,7 @@ func createReport(root fyne.App, home fyne.Window) {
 		widget.NewButton("Whole spending history", func() {}),
 	))
 
+	window.Resize(fyne.NewSize(400, 120))
 	window.Show()
 }
 
@@ -79,12 +81,13 @@ func ViewExpensesLayout(root fyne.App, home fyne.Window) {
 			createReport(root, window)
 		}),
 
-		widget.NewButton("Back", func() {
+		widget.NewButton("Home", func() {
 			home.SetMaster()
 			home.Show()
 			window.Hide()
 		}),
 	))
 
+	window.Resize(fyne.NewSize(600, 200))
 	window.Show()
 }

@@ -21,17 +21,21 @@ func main() {
 	label.Alignment = fyne.TextAlignCenter
 	label.TextStyle = fyne.TextStyle{Bold: true}
 
-	home.SetContent(container.NewVBox(
+	homeLayout := container.NewVBox(
 		label,
 
 		widget.NewButton("Add an Expense", func() {
-			layouts.ExpenseAdditionWindow(root, home)
+			go layouts.ExpenseAdditionWindow(root, home)
 		}),
 		widget.NewButton("Expense Report", func() {
 			layouts.ViewExpensesLayout(root, home)
 		}),
-		widget.NewButton("Preferences", func() {}),
-	))
+		widget.NewButton("Preferences", func() {
+			layouts.Preferences(root, home)
+		}),
+	)
+
+	home.SetContent(homeLayout)
 
 	home.Resize(fyne.NewSize(400, 200))
 	home.ShowAndRun()
