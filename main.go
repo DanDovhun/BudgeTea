@@ -1,6 +1,5 @@
 // BudgeTea, (C) Daniel Dovhun
 // Simple budgetting tool built with Go
-// Version 0.0.2
 
 package main
 
@@ -13,30 +12,29 @@ import (
 	"BudgeTea/layouts"
 )
 
-func main() {
-	root := app.New()
-	home := root.NewWindow("BudgeTea")
+func main() { // Main function
+	root := app.New()                  // Create an application instance
+	home := root.NewWindow("BudgeTea") // Create a home window
 
-	label := widget.NewLabel("BudgeTea")
-	label.Alignment = fyne.TextAlignCenter
-	label.TextStyle = fyne.TextStyle{Bold: true}
+	label := widget.NewLabel("BudgeTea")         // Create a title
+	label.Alignment = fyne.TextAlignCenter       // Allign to center
+	label.TextStyle = fyne.TextStyle{Bold: true} // Make the title bold
 
-	homeLayout := container.NewVBox(
-		label,
+	homeLayout := container.NewVBox( // Create a container
+		label, // Add title label
 
-		widget.NewButton("Add an Expense", func() {
-			go layouts.ExpenseAdditionWindow(root, home)
+		widget.NewButton("Add an Expense", func() { // Create a button that switches to ExpenseAdditionWindow
+			go layouts.ExpenseAdditionWindow(root, home) // Replace home window with the new one
 		}),
-		widget.NewButton("Expense Report", func() {
-			layouts.ViewExpensesLayout(root, home)
+		widget.NewButton("Expense Report", func() { // Create a button that switches to ViewExpensesLayout
+			go layouts.ViewExpensesLayout(root, home) // Switch to the new layout
 		}),
-		widget.NewButton("Preferences", func() {
-			layouts.Preferences(root, home)
+		widget.NewButton("Preferences", func() { // Create a button that switches to Preferences
+			go layouts.Preferences(root, home) // Switch to preferences
 		}),
 	)
 
-	home.SetContent(homeLayout)
+	home.SetContent(homeLayout) // Set content to the current container
 
-	home.Resize(fyne.NewSize(400, 200))
-	home.ShowAndRun()
+	home.ShowAndRun() // Start the application and show the window
 }
