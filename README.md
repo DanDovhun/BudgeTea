@@ -57,7 +57,7 @@ Binaries (executable files) for Windows and Linux will be found in the ***binari
 
 3. Make sure that all dependencies are set up properly
    Execute these 3 commands:
-   
+
    `go get fyne.io/fyne/v2`
 
 	 `go get fyne.io/fyne/v2/cmd/fyne`
