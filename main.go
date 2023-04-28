@@ -35,6 +35,6 @@ func main() { // Main function
 	)
 
 	home.SetContent(homeLayout) // Set content to the current container
-
+	home.Resize(fyne.NewSize(250, 50))
 	home.ShowAndRun() // Start the application and show the window
 }
