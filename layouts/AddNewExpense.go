@@ -1,7 +1,8 @@
 package layouts
 
 import (
-	"fmt"
+	"BudgeTea/datamng"
+	"strconv"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/container"
@@ -69,10 +70,45 @@ func ExpenseAdditionWindow(root fyne.App, home fyne.Window) {
 
 		// Submit input
 		widget.NewButton("Submit", func() {
-			fmt.Println(denomination)
-			fmt.Println(category)
+			if len(expenseTitle.Text) == 0 {
+				Popup(root, window, "Please enter the expense's name", true)
 
-			// To be implemented
+				return
+			}
+
+			if len(expenseCost.Text) == 0 {
+				Popup(root, window, "Please enter expense's cost", true)
+
+				return
+			}
+
+			if len(category) == 0 {
+				Popup(root, window, "Pleasxe select a category", true)
+
+				return
+			}
+
+			if len(denomination) == 0 {
+				Popup(root, window, "Please select a denomination", false)
+
+				return
+			}
+
+			cost, err := strconv.ParseFloat(expenseCost.Text, 64)
+
+			if err != nil {
+				Popup(root, window, "Please enter the expense's cost as a number", true)
+
+				return
+			}
+
+			expense := datamng.NewExpense(expenseTitle.Text, category, denomination, cost)
+
+			err = datamng.Add(expense)
+
+			if err != nil {
+				Popup(root, window, "Couldn't add expense", true)
+			}
 		}),
 
 		widget.NewButton("Home", func() {
