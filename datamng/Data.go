@@ -4,25 +4,6 @@ import (
 	"time"
 )
 
-// Month struct
-type Month struct {
-	// Months budget and
-	Budget        float64
-	TotalSpending float64
-
-	// Stores the month's name and year
-	Year int
-	Moon time.Month
-
-	// Stores month's expenses in specific categories
-	Groceries    []Expense
-	Hobbies      []Expense
-	Rent         []Expense
-	OtherBills   []Expense
-	Travel       []Expense
-	Miscelanious []Expense
-}
-
 // Data struct
 // The database is loaded into this struct
 type Data struct {
@@ -42,10 +23,6 @@ func (data Data) FindMonthByYear(month time.Month, year int) int {
 	}
 
 	return -1 // If not found, return -1
-}
-
-func (month *Month) SetBudget(budget float64) {
-	month.Budget = budget
 }
 
 func (data *Data) SetBudget(budget float64) {
