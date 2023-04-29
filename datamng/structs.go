@@ -7,9 +7,16 @@ import (
 type Month struct {
 	Budget        float64
 	TotalSpending float64
-	Year          int
-	Moon          time.Month
-	Expenses      []Expense
+
+	Year int
+	Moon time.Month
+
+	Groceries    []Expense
+	Hobbies      []Expense
+	Rent         []Expense
+	OtherBills   []Expense
+	Travel       []Expense
+	Miscelanious []Expense
 }
 
 type Data struct {

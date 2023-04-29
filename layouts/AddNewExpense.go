@@ -43,7 +43,7 @@ func ExpenseAdditionWindow(root fyne.App, home fyne.Window) {
 
 	// Category options
 	categories := widget.NewRadioGroup([]string{
-		"Grocieries",
+		"Groceries",
 		"Hobbies",
 		"Rent",
 		"Other bills",
