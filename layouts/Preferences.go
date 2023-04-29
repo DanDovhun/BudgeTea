@@ -2,6 +2,7 @@ package layouts
 
 import (
 	"fmt"
+	"strconv"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/container"
@@ -19,7 +20,12 @@ func setBudget(root fyne.App, home fyne.Window) {
 		budgetEntry, // Adds the entry field
 
 		widget.NewButton("Set budget", func() { // Button to set the new budget
+			budget, err := strconv.ParseFloat(budgetEntry.Text, 64)
 
+			if err != nil {
+				Popup(root, home, "Please only enter numbers", true)
+				return
+			}
 		}),
 	))
 
