@@ -19,7 +19,7 @@ func setBudget(root fyne.App, home fyne.Window) {
 		budgetEntry, // Adds the entry field
 
 		widget.NewButton("Set budget", func() { // Button to set the new budget
-			// To be implemented
+
 		}),
 	))
 
