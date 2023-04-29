@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"os"
+	"time"
 )
 
 func SetBudget(budget float64) error {
@@ -19,7 +20,21 @@ func SetBudget(budget float64) error {
 	byteValue, _ := ioutil.ReadAll(data) //Read the file as []bytes
 	json.Unmarshal(byteValue, &months)   // Store the bytes in the months
 
-	months.SetBudget(budget)                              // Set current budget
+	months.SetBudget(budget) // Set current budget
+
+	currentYear, currentMonth, _ := time.Now().Date() // Get current year and month
+
+	monthIndex := months.FindMonthByYear(currentMonth, currentYear) // Check where current month is and if it exists
+
+	// If the month doesn't yet exist (the new expense is first that month)
+	if monthIndex == -1 {
+		// Add the month to the database
+		months.Months = append(months.Months, NewMonth(months.Budget))
+
+		// The index of that month will be the last in the database
+		monthIndex = len(months.Months) - 1
+	}
+
 	months.Months[len(months.Months)-1].SetBudget(budget) // Set current month's budget
 
 	j, _ := json.MarshalIndent(months, "", "    ")

@@ -25,6 +25,7 @@ func (data Data) FindMonthByYear(month time.Month, year int) int {
 	return -1 // If not found, return -1
 }
 
+// Sets current budget
 func (data *Data) SetBudget(budget float64) {
 	data.Budget = budget
 }

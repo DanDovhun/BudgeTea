@@ -60,20 +60,7 @@ func (ex Expense) Add(expense Expense) error {
 	// If the month doesn't yet exist (the new expense is first that month)
 	if monthIndex == -1 {
 		// Add the month to the database
-		months.Months = append(months.Months, Month{
-			Budget:        months.Budget, // Make that months budget equal to the current budget
-			TotalSpending: 0,             // Set total spending to 0
-
-			Year: currentYear,
-			Moon: currentMonth,
-
-			Groceries:    []Expense{},
-			Hobbies:      []Expense{},
-			Rent:         []Expense{},
-			OtherBills:   []Expense{},
-			Travel:       []Expense{},
-			Miscelanious: []Expense{},
-		})
+		months.Months = append(months.Months, NewMonth(months.Budget))
 
 		// The index of that month will be the last in the database
 		monthIndex = len(months.Months) - 1
