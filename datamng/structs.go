@@ -20,8 +20,9 @@ type Month struct {
 }
 
 type Data struct {
-	Budget float64
-	Months []Month
+	Budget       float64
+	Denomination float64
+	Months       []Month
 }
 
 func (data Data) FindMonthByYear(month time.Month, year int) int {
