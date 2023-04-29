@@ -26,8 +26,9 @@ type Month struct {
 // Data struct
 // The database is loaded into this struct
 type Data struct {
-	Budget float64 // Current budget
-	Months []Month // Stores months
+	Budget       float64
+	Denomination float64
+	Months       []Month
 }
 
 // Searches for a specific month
