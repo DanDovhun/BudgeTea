@@ -1,0 +1,45 @@
+{
+    "Budget": 1000,
+    "Denomination": 0,
+    "Months": [
+        {
+            "Budget": 1000,
+            "TotalSpending": 346,
+            "Year": 2023,
+            "Moon": 4,
+            "Groceries": [
+                {
+                    "Name": "Test",
+                    "Category": "Groceries",
+                    "Price": 123,
+                    "Denomination": "SEK",
+                    "Day": 29,
+                    "Date": "29-April-2023"
+                }
+            ],
+            "Hobbies": [
+                {
+                    "Name": "Test 3",
+                    "Category": "Hobbies",
+                    "Price": 123,
+                    "Denomination": "EUR",
+                    "Day": 29,
+                    "Date": "29-April-2023"
+                }
+            ],
+            "Rent": [],
+            "OtherBills": [],
+            "Travel": [],
+            "Miscelanious": [
+                {
+                    "Name": "Test 2",
+                    "Category": "Miscelanious",
+                    "Price": 100,
+                    "Denomination": "EUR",
+                    "Day": 29,
+                    "Date": "29-April-2023"
+                }
+            ]
+        }
+    ]
+}

@@ -1,6 +1,7 @@
 package layouts
 
 import (
+	"BudgeTea/datamng"
 	"fmt"
 	"strconv"
 
@@ -24,6 +25,14 @@ func setBudget(root fyne.App, home fyne.Window) {
 
 			if err != nil {
 				Popup(root, home, "Please only enter numbers", true)
+				return
+			}
+
+			err = datamng.SetBudget(budget)
+
+			if err != nil {
+				Popup(root, window, "Error has occured", true)
+
 				return
 			}
 		}),

@@ -70,45 +70,61 @@ func ExpenseAdditionWindow(root fyne.App, home fyne.Window) {
 
 		// Submit input
 		widget.NewButton("Submit", func() {
+			// If the user didn't enter expense's title
 			if len(expenseTitle.Text) == 0 {
 				Popup(root, window, "Please enter the expense's name", true)
 
 				return
 			}
 
+			// If the user didn't enter expense's cost
 			if len(expenseCost.Text) == 0 {
 				Popup(root, window, "Please enter expense's cost", true)
 
 				return
 			}
 
+			// If the user didn't choose a category
 			if len(category) == 0 {
 				Popup(root, window, "Pleasxe select a category", true)
 
 				return
 			}
 
+			// If the user didn't choose a denomination
 			if len(denomination) == 0 {
 				Popup(root, window, "Please select a denomination", false)
 
 				return
 			}
 
+			// Try to convert cost input into a float64
 			cost, err := strconv.ParseFloat(expenseCost.Text, 64)
 
+			// If it cannot be converted
 			if err != nil {
+				// Send an error message
 				Popup(root, window, "Please enter the expense's cost as a number", true)
 
 				return
 			}
 
+			// Create a new expense object
 			expense := datamng.NewExpense(expenseTitle.Text, category, denomination, cost)
 
-			err = datamng.Add(expense)
+			// Try to add the expense into the database
+			err = expense.Add(expense)
 
+			// If it cannot be added
 			if err != nil {
+				// Send an error message
 				Popup(root, window, "Couldn't add expense", true)
+
+				return
 			}
+
+			// If everything goes right, send a success message
+			Popup(root, window, "Expense added succesfully", false)
 		}),
 
 		widget.NewButton("Home", func() {
