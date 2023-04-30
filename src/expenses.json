@@ -1,0 +1,18 @@
+{
+    "budget": 2000,
+    "denomination": "EUR",
+    "months": [
+        {
+            "budget": 2000,
+            "total_spending": 0,
+            "year": 2023,
+            "month": 4,
+            "groceries": [],
+            "hobbies": [],
+            "rent": [],
+            "other_bills": [],
+            "travel": [],
+            "miscalenious": []
+        }
+    ]
+}
