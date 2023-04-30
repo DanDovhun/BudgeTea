@@ -2,6 +2,7 @@ package layouts
 
 import (
 	"BudgeTea/datamng"
+	"fmt"
 	"strconv"
 
 	"fyne.io/fyne"
@@ -50,9 +51,20 @@ func setDenomination(root fyne.App, home fyne.Window) {
 
 	window := root.NewWindow("Set denomination - BudgeTea") // New window
 
-	title := widget.NewLabel("Denominations (current = SEK): ") // Title label, will also show currently set denomination
-	title.Alignment = fyne.TextAlignCenter                      // Allign it to center
-	title.TextStyle = fyne.TextStyle{Bold: true}                // Make it bold
+	currency, errs := datamng.GetCurrency() // Gets currenctly set denomination
+	titleMessage := ""
+
+	if errs != nil { // If the program cannot get currently set denomination
+		Popup(root, window, "Cannot get current denomination", true)
+		return
+	}
+
+	// Set the title
+	titleMessage = fmt.Sprintf("Set denomination (current = %v)", currency)
+
+	title := widget.NewLabel(titleMessage)       // Title label, will also show currently set denomination
+	title.Alignment = fyne.TextAlignCenter       // Allign it to center
+	title.TextStyle = fyne.TextStyle{Bold: true} // Make it bold
 
 	denoms := widget.NewRadioGroup([]string{ // Create an instance of a group of radio buttons
 		"EUR", // Euros

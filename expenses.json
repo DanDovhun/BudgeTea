@@ -1,18 +1,18 @@
 {
-    "Budget": 18000,
-    "Denomination": "SEK",
-    "Months": [
+    "budget": 18000,
+    "denomination": "USD",
+    "months": [
         {
-            "Budget": 18000,
-            "TotalSpending": 0,
-            "Year": 2023,
-            "Moon": 4,
-            "Groceries": [],
-            "Hobbies": [],
-            "Rent": [],
-            "OtherBills": [],
-            "Travel": [],
-            "Miscelanious": []
+            "budget": 18000,
+            "total_spending": 0,
+            "year": 2023,
+            "month": 0,
+            "groceries": [],
+            "hobbies": [],
+            "rent": [],
+            "other_bills": null,
+            "travel": [],
+            "miscalenious": null
         }
     ]
 }

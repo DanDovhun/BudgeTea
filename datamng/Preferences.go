@@ -64,7 +64,21 @@ func SetCurrency(currency string) error {
 	return nil
 }
 
-func GetCurrency() string {
+func GetCurrency() (string, error) {
+	var currency string
+	data, err := os.Open("expenses.json") // Open the json file
+	var months Data                       // The loaded data will be stored here
 
-	return ""
+	if err != nil {
+		return "", err
+	}
+
+	byteValue, _ := ioutil.ReadAll(data) //Read the file as []bytes
+	json.Unmarshal(byteValue, &months)   // Store the bytes in the months
+
+	currency = months.Denomination
+
+	data.Close() // close the file
+
+	return currency, nil
 }
