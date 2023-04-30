@@ -33,20 +33,26 @@ func Convert(from, to string, amount float64) (float64, error) {
 	}
 
 	var value Response
+	var conversion float64
 
 	json.Unmarshal(response, &value)
 
+	fmt.Println(value.Data.Euro)
+	fmt.Println(value.Data.Dollars)
+	fmt.Println(value.Data.Kronar)
+	fmt.Println(amount)
+
 	if from == "EUR" {
-		return value.Data.Euro * amount, nil
+		conversion = value.Data.Euro * amount
 	}
 
 	if from == "USD" {
-		return value.Data.Dollars * amount, nil
+		conversion = value.Data.Euro * amount
 	}
 
 	if from == "SEK" {
-		return value.Data.Kronar * amount, nil
+		conversion = value.Data.Euro * amount
 	}
 
-	return 0, nil
+	return conversion, nil
 }

@@ -2,6 +2,7 @@ package datamng
 
 import (
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"os"
 	"time"
@@ -55,6 +56,18 @@ func SetCurrency(currency string) error {
 
 	byteValue, _ := ioutil.ReadAll(data) //Read the file as []bytes
 	json.Unmarshal(byteValue, &months)   // Store the bytes in the months
+
+	oldCurrency, err := GetCurrency() // Get old currency
+
+	if err != nil {
+		return err
+	}
+
+	connectionError := months.Months[len(months.Months)-1].ChangeSpendingToCurrency(oldCurrency, currency)
+
+	if connectionError != nil {
+		return errors.New("Cannot connect to the forex API")
+	}
 
 	months.SetCurrency(currency)
 

@@ -1,6 +1,8 @@
 package datamng
 
 import (
+	"BudgeTea/forex"
+	"fmt"
 	"time"
 )
 
@@ -47,7 +49,27 @@ func (month *Month) SetBudget(budget float64) {
 	month.Budget = budget
 }
 
+// When changing prefered currency, the spending will be changed to the value of the new one
+func (month *Month) ChangeSpendingToCurrency(old, new string) error {
+	spending, err := forex.Convert(old, new, month.TotalSpending) // Convert spending to the new currency
+
+	fmt.Printf(fmt.Sprintf("%v", spending))
+
+	if err != nil { // If error happens
+		return err // ret7urn error
+	}
+
+	month.TotalSpending = spending // Set spending to the new value
+
+	return nil // Return null error
+}
+
 // Gets Budget
 func (month Month) GetBudget() float64 {
 	return month.Budget
+}
+
+// Will get total spending
+func (month Month) GetTotalSpending() float64 {
+	return month.TotalSpending
 }

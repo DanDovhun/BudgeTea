@@ -1,9 +1,9 @@
 {
-    "budget": 2000,
-    "denomination": "USD",
+    "budget": 500,
+    "denomination": "SEK",
     "months": [
         {
-            "budget": 2000,
+            "budget": 500,
             "total_spending": 0,
             "year": 2023,
             "month": 4,
