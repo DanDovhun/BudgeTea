@@ -18,19 +18,32 @@ type Expense struct {
 }
 
 // Creates a new expense, it's essentially a constructor for the Expense struct
-func NewExpense(title, category, denomination string, price float64) Expense {
+func NewExpense(title, category string, price float64) (Expense, error) {
 	currentTime := time.Now()              // Get current time
 	year, month, day := currentTime.Date() // Get current date
+
+	data, err := os.Open("expenses.json") // Open the json file
+	var months Data                       // The loaded data will be stored here
+
+	// If the file couldn't be opened
+	if err != nil {
+		return Expense{}, err // Return the error
+	}
+
+	defer data.Close() // close the file when the function ends
+
+	byteValue, _ := ioutil.ReadAll(data) //Read the file as []bytes
+	json.Unmarshal(byteValue, &months)   // Store the bytes in the months
 
 	// Setup and return a new expense
 	return Expense{
 		Name:         title,
 		Category:     category,
 		Price:        price,
-		Denomination: denomination,
+		Denomination: months.Denomination,
 		Day:          day,
 		Date:         fmt.Sprintf("%v-%v-%v", day, month, year),
-	}
+	}, nil
 }
 
 // Formats the Expense into a string so it could be added to a CSV file

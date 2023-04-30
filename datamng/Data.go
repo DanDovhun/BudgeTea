@@ -1,6 +1,9 @@
 package datamng
 
 import (
+	"encoding/json"
+	"io/ioutil"
+	"os"
 	"time"
 )
 
@@ -33,4 +36,22 @@ func (data *Data) SetBudget(budget float64) {
 // Sets preferred currency
 func (data *Data) SetCurrency(currency string) {
 	data.Denomination = currency
+}
+
+// Gets budget from the db
+func GetBudget() (float64, error) {
+	data, err := os.Open("expenses.json") // Open the json file
+	var months Data                       // The loaded data will be stored here
+
+	// If the file couldn't be opened
+	if err != nil {
+		return 0, err // Return the error
+	}
+
+	byteValue, _ := ioutil.ReadAll(data) //Read the file as []bytes
+	json.Unmarshal(byteValue, &months)   // Store the bytes in the months
+
+	data.Close()
+
+	return months.Budget, nil
 }

@@ -1,6 +1,8 @@
 package datamng
 
-import "time"
+import (
+	"time"
+)
 
 // Month struct
 type Month struct {

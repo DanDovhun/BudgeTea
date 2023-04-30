@@ -14,10 +14,15 @@ import (
 func setBudget(root fyne.App, home fyne.Window) {
 	window := root.NewWindow("Set budget - BudgeTea") // Create the window and set its title
 
+	budget, _ := datamng.GetBudget()
+	currency, _ := datamng.GetCurrency()
+	budgetTitle := widget.NewLabel(fmt.Sprintf("Current budget: %v %v", budget, currency))
+
 	budgetEntry := widget.NewEntry()         // Create a new entry field
 	budgetEntry.SetPlaceHolder("New Budget") // Set the placeholder to 'New Budget'
 
 	window.SetContent(container.NewVBox( // Creates a new container and sets the content
+		budgetTitle,
 		budgetEntry, // Adds the entry field
 
 		widget.NewButton("Set budget", func() { // Button to set the new budget
@@ -46,7 +51,7 @@ func setBudget(root fyne.App, home fyne.Window) {
 }
 
 // Gathers user input to set a new preferred denomination
-func setDenomination(root fyne.App, home fyne.Window) {
+func setDenomination(root fyne.App, home fyne.Window) string {
 	var denomination string // Stores user's choice
 
 	window := root.NewWindow("Set denomination - BudgeTea") // New window
@@ -56,7 +61,7 @@ func setDenomination(root fyne.App, home fyne.Window) {
 
 	if errs != nil { // If the program cannot get currently set denomination
 		Popup(root, window, "Cannot get current denomination", true)
-		return
+		return ""
 	}
 
 	// Set the title
@@ -94,6 +99,8 @@ func setDenomination(root fyne.App, home fyne.Window) {
 
 	window.Resize(fyne.NewSize(320, 100))
 	window.Show()
+
+	return denomination
 }
 
 // Preferences window

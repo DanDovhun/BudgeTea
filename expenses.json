@@ -1,18 +1,18 @@
 {
-    "budget": 18000,
+    "budget": 2000,
     "denomination": "USD",
     "months": [
         {
-            "budget": 18000,
+            "budget": 2000,
             "total_spending": 0,
             "year": 2023,
-            "month": 0,
+            "month": 4,
             "groceries": [],
             "hobbies": [],
             "rent": [],
-            "other_bills": null,
+            "other_bills": [],
             "travel": [],
-            "miscalenious": null
+            "miscalenious": []
         }
     ]
 }

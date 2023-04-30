@@ -24,13 +24,13 @@ func main() { // Main function
 		label, // Add title label
 
 		widget.NewButton("Add an Expense", func() { // Create a button that switches to ExpenseAdditionWindow
-			go layouts.ExpenseAdditionWindow(root, home) // Replace home window with the new one
+			layouts.ExpenseAdditionWindow(root, home) // Replace home window with the new one
 		}),
 		widget.NewButton("Expense Report", func() { // Create a button that switches to ViewExpensesLayout
-			go layouts.ViewExpensesLayout(root, home) // Switch to the new layout
+			layouts.ViewExpensesLayout(root, home) // Switch to the new layout
 		}),
 		widget.NewButton("Preferences", func() { // Create a button that switches to Preferences
-			go layouts.Preferences(root, home) // Switch to preferences
+			layouts.Preferences(root, home) // Switch to preferences
 		}),
 	)
 
