@@ -9,12 +9,19 @@ import (
 	"fyne.io/fyne/container"
 	"fyne.io/fyne/widget"
 
+	"BudgeTea/forex"
 	"BudgeTea/layouts"
 )
 
 func main() { // Main function
+	_, notConnected := forex.Convert("SEK", "USD", 100)
+
 	root := app.New()                  // Create an application instance
 	home := root.NewWindow("BudgeTea") // Create a home window
+
+	if notConnected != nil {
+		layouts.Popup(root, home, "Internet connection not found.\n\nPlease make sure to be connected to the internet \nto get full BudgeTea experience", true)
+	}
 
 	label := widget.NewLabel("BudgeTea")         // Create a title
 	label.Alignment = fyne.TextAlignCenter       // Allign to center
