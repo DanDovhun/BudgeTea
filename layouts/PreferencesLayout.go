@@ -2,7 +2,6 @@ package layouts
 
 import (
 	"BudgeTea/datamng"
-	"fmt"
 	"strconv"
 
 	"fyne.io/fyne"
@@ -35,10 +34,13 @@ func setBudget(root fyne.App, home fyne.Window) {
 
 				return
 			}
+
+			Popup(root, home, "Budget set", false)
+			window.Hide()
 		}),
 	))
 
-	window.Resize(fyne.NewSize(100, 100)) // Resizes to 100x100
+	window.Resize(fyne.NewSize(300, 100)) // Resizes to 100x100
 	window.Show()                         // Shows the window
 }
 
@@ -65,11 +67,21 @@ func setDenomination(root fyne.App, home fyne.Window) {
 		denoms,
 
 		widget.NewButton("Set denomination", func() {
-			fmt.Println(denomination)
+			// If no denomination is selected
+			if len(denomination) == 0 {
+				Popup(root, window, "Please select a denomination", true)
 
-			// To be implemented
+				return
+			}
+
+			datamng.SetCurrency(denomination)
+			Popup(root, window, "Denomination set succesfully", false)
+			window.Close()
 		}),
 	))
+
+	window.Resize(fyne.NewSize(320, 100))
+	window.Show()
 }
 
 // Preferences window
@@ -83,8 +95,6 @@ func Preferences(root fyne.App, home fyne.Window) {
 	title := widget.NewLabel("Preferences")
 	title.Alignment = fyne.TextAlignCenter
 	title.TextStyle = fyne.TextStyle{Bold: true}
-
-	Popup(root, home, "Hello world", false)
 
 	// Fill the window with a new container
 	window.SetContent(container.NewVBox(

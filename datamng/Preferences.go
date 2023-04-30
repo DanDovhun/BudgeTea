@@ -42,3 +42,29 @@ func SetBudget(budget float64) error {
 
 	return nil
 }
+
+func SetCurrency(currency string) error {
+	data, err := os.Open("expenses.json") // Open the json file
+	var months Data                       // The loaded data will be stored here
+
+	if err != nil {
+		return err
+	}
+
+	defer data.Close() // close the file when the function ends
+
+	byteValue, _ := ioutil.ReadAll(data) //Read the file as []bytes
+	json.Unmarshal(byteValue, &months)   // Store the bytes in the months
+
+	months.SetCurrency(currency)
+
+	j, _ := json.MarshalIndent(months, "", "    ")
+	_ = ioutil.WriteFile("expenses.json", j, 0644)
+
+	return nil
+}
+
+func GetCurrency() string {
+
+	return ""
+}

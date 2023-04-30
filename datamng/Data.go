@@ -7,9 +7,9 @@ import (
 // Data struct
 // The database is loaded into this struct
 type Data struct {
-	Budget       float64
-	Denomination float64
-	Months       []Month
+	Budget       float64 `json:"budget"`
+	Denomination string  `json:"denomination"`
+	Months       []Month `json:"months"`
 }
 
 // Searches for a specific month
@@ -28,4 +28,9 @@ func (data Data) FindMonthByYear(month time.Month, year int) int {
 // Sets current budget
 func (data *Data) SetBudget(budget float64) {
 	data.Budget = budget
+}
+
+// Sets preferred currency
+func (data *Data) SetCurrency(currency string) {
+	data.Denomination = currency
 }

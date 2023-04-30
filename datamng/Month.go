@@ -5,20 +5,20 @@ import "time"
 // Month struct
 type Month struct {
 	// Months budget and
-	Budget        float64
-	TotalSpending float64
+	Budget        float64 `json:"budget"`
+	TotalSpending float64 `json:"total_spending"`
 
 	// Stores the month's name and year
-	Year int
-	Moon time.Month
+	Year int        `json:"year"`
+	Moon time.Month `json:"month"`
 
 	// Stores month's expenses in specific categories
-	Groceries    []Expense
-	Hobbies      []Expense
-	Rent         []Expense
-	OtherBills   []Expense
-	Travel       []Expense
-	Miscelanious []Expense
+	Groceries    []Expense `json:"groceries"`
+	Hobbies      []Expense `json:"hobbies"`
+	Rent         []Expense `json:"rent"`
+	OtherBills   []Expense `json:"other_bills"`
+	Travel       []Expense `json:"travel"`
+	Miscelanious []Expense `json:"miscalenious"`
 }
 
 func NewMonth(budget float64) Month {
@@ -43,4 +43,9 @@ func NewMonth(budget float64) Month {
 // Sets month's budget
 func (month *Month) SetBudget(budget float64) {
 	month.Budget = budget
+}
+
+// Gets Budget
+func (month Month) GetBudget() float64 {
+	return month.Budget
 }

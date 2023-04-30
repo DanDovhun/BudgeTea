@@ -1,0 +1,18 @@
+{
+    "Budget": 18000,
+    "Denomination": "SEK",
+    "Months": [
+        {
+            "Budget": 18000,
+            "TotalSpending": 0,
+            "Year": 2023,
+            "Moon": 4,
+            "Groceries": [],
+            "Hobbies": [],
+            "Rent": [],
+            "OtherBills": [],
+            "Travel": [],
+            "Miscelanious": []
+        }
+    ]
+}
