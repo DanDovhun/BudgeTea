@@ -2,13 +2,57 @@ package datamng
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"time"
 )
 
+type Expense struct {
+	Name         string
+	Category     string
+	Price        float64
+	Denomination string
+	Day          int
+	Date         string
+}
+
+// Creates a new expense, it's essentially a constructor for the Expense struct
+func NewExpense(title, category string, price float64) (Expense, error) {
+	currentTime := time.Now()              // Get current time
+	year, month, day := currentTime.Date() // Get current date
+
+	data, err := os.Open("expenses.json") // Open the json file
+	var months Data                       // The loaded data will be stored here
+
+	// If the file couldn't be opened
+	if err != nil {
+		return Expense{}, err // Return the error
+	}
+
+	defer data.Close() // close the file when the function ends
+
+	byteValue, _ := ioutil.ReadAll(data) //Read the file as []bytes
+	json.Unmarshal(byteValue, &months)   // Store the bytes in the months
+
+	// Setup and return a new expense
+	return Expense{
+		Name:         title,
+		Category:     category,
+		Price:        price,
+		Denomination: months.Denomination,
+		Day:          day,
+		Date:         fmt.Sprintf("%v-%v-%v", day, month, year),
+	}, nil
+}
+
+// Formats the Expense into a string so it could be added to a CSV file
+func (ex Expense) FormatToCSV() string {
+	return fmt.Sprintf("%v,%v,%v,%v,%v", ex.Name, ex.Category, ex.Price, ex.Denomination, ex.Date)
+}
+
 // Adds a new expense to the database
-func Add(expense Expense) error {
+func (ex Expense) Add(expense Expense) error {
 	data, err := os.Open("expenses.json") // Open the json file
 	var months Data                       // The loaded data will be stored here
 
@@ -29,20 +73,7 @@ func Add(expense Expense) error {
 	// If the month doesn't yet exist (the new expense is first that month)
 	if monthIndex == -1 {
 		// Add the month to the database
-		months.Months = append(months.Months, Month{
-			Budget:        months.Budget, // Make that months budget equal to the current budget
-			TotalSpending: 0,             // Set total spending to 0
-
-			Year: currentYear,
-			Moon: currentMonth,
-
-			Groceries:    []Expense{},
-			Hobbies:      []Expense{},
-			Rent:         []Expense{},
-			OtherBills:   []Expense{},
-			Travel:       []Expense{},
-			Miscelanious: []Expense{},
-		})
+		months.Months = append(months.Months, NewMonth(months.Budget))
 
 		// The index of that month will be the last in the database
 		monthIndex = len(months.Months) - 1
@@ -78,4 +109,8 @@ func Add(expense Expense) error {
 
 	// Do not return errors
 	return nil
+}
+
+func (ex *Expense) SetPrice(price float64) {
+	ex.Price = price
 }

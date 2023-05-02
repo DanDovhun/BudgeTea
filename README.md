@@ -39,6 +39,7 @@ Diagram showing between multiple entities in the database
 
 ## Tools:
 The backend of BudgeTea is built using Go with Fyne as the front end library. BudgeTea is also using JSON to store data.
+Currency conversion api: https://anyapi.io/app/currency-exchange-api#try
 
 ## Binaries
 Binaries (executable files) for Windows and Linux will be found in the ***binaries*** folder

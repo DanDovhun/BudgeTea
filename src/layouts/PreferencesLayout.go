@@ -1,7 +1,9 @@
 package layouts
 
 import (
+	"BudgeTea/datamng"
 	"fmt"
+	"strconv"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/container"
@@ -12,30 +14,62 @@ import (
 func setBudget(root fyne.App, home fyne.Window) {
 	window := root.NewWindow("Set budget - BudgeTea") // Create the window and set its title
 
+	budget, _ := datamng.GetBudget()
+	currency, _ := datamng.GetCurrency()
+	budgetTitle := widget.NewLabel(fmt.Sprintf("Current budget: %v %v", budget, currency))
+
 	budgetEntry := widget.NewEntry()         // Create a new entry field
 	budgetEntry.SetPlaceHolder("New Budget") // Set the placeholder to 'New Budget'
 
 	window.SetContent(container.NewVBox( // Creates a new container and sets the content
+		budgetTitle,
 		budgetEntry, // Adds the entry field
 
 		widget.NewButton("Set budget", func() { // Button to set the new budget
+			budget, err := strconv.ParseFloat(budgetEntry.Text, 64)
 
+			if err != nil {
+				Popup(root, home, "Please only enter numbers", true)
+				return
+			}
+
+			err = datamng.SetBudget(budget)
+
+			if err != nil {
+				Popup(root, window, "Error has occured", true)
+
+				return
+			}
+
+			Popup(root, home, "Budget set", false)
+			window.Hide()
 		}),
 	))
 
-	window.Resize(fyne.NewSize(100, 100)) // Resizes to 100x100
+	window.Resize(fyne.NewSize(300, 100)) // Resizes to 100x100
 	window.Show()                         // Shows the window
 }
 
 // Gathers user input to set a new preferred denomination
-func setDenomination(root fyne.App, home fyne.Window) {
+func setDenomination(root fyne.App, home fyne.Window) string {
 	var denomination string // Stores user's choice
 
 	window := root.NewWindow("Set denomination - BudgeTea") // New window
 
-	title := widget.NewLabel("Denominations (current = SEK): ") // Title label, will also show currently set denomination
-	title.Alignment = fyne.TextAlignCenter                      // Allign it to center
-	title.TextStyle = fyne.TextStyle{Bold: true}                // Make it bold
+	currency, errs := datamng.GetCurrency() // Gets currenctly set denomination
+	titleMessage := ""
+
+	if errs != nil { // If the program cannot get currently set denomination
+		Popup(root, window, "Cannot get current denomination", true)
+		return ""
+	}
+
+	// Set the title
+	titleMessage = fmt.Sprintf("Set denomination (current = %v)", currency)
+
+	title := widget.NewLabel(titleMessage)       // Title label, will also show currently set denomination
+	title.Alignment = fyne.TextAlignCenter       // Allign it to center
+	title.TextStyle = fyne.TextStyle{Bold: true} // Make it bold
 
 	denoms := widget.NewRadioGroup([]string{ // Create an instance of a group of radio buttons
 		"EUR", // Euros
@@ -50,11 +84,23 @@ func setDenomination(root fyne.App, home fyne.Window) {
 		denoms,
 
 		widget.NewButton("Set denomination", func() {
-			fmt.Println(denomination)
+			// If no denomination is selected
+			if len(denomination) == 0 {
+				Popup(root, window, "Please select a denomination", true)
 
-			// To be implemented
+				return
+			}
+
+			datamng.SetCurrency(denomination)
+			Popup(root, window, "Denomination set succesfully", false)
+			window.Close()
 		}),
 	))
+
+	window.Resize(fyne.NewSize(320, 100))
+	window.Show()
+
+	return denomination
 }
 
 // Preferences window
@@ -68,8 +114,6 @@ func Preferences(root fyne.App, home fyne.Window) {
 	title := widget.NewLabel("Preferences")
 	title.Alignment = fyne.TextAlignCenter
 	title.TextStyle = fyne.TextStyle{Bold: true}
-
-	Popup(root, home, "Hello world", false)
 
 	// Fill the window with a new container
 	window.SetContent(container.NewVBox(

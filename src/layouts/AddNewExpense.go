@@ -2,6 +2,7 @@ package layouts
 
 import (
 	"BudgeTea/datamng"
+	"fmt"
 	"strconv"
 
 	"fyne.io/fyne"
@@ -12,7 +13,7 @@ import (
 // User enters information about a new expense
 func ExpenseAdditionWindow(root fyne.App, home fyne.Window) {
 	// Stores user's choice for denomination and category
-	var denomination, category string
+	var category string
 
 	// Create a new window, set it to master and hide the home window
 	window := root.NewWindow("Add New Expense - BudgeTea")
@@ -32,15 +33,6 @@ func ExpenseAdditionWindow(root fyne.App, home fyne.Window) {
 	expenseCost := widget.NewEntry()
 	expenseCost.SetPlaceHolder("Purchase cost:")
 
-	// Denomination options
-	denoms := widget.NewRadioGroup([]string{
-		"EUR",
-		"SEK",
-		"USD",
-	}, func(choice string) {
-		denomination = choice
-	})
-
 	// Category options
 	categories := widget.NewRadioGroup([]string{
 		"Groceries",
@@ -53,6 +45,17 @@ func ExpenseAdditionWindow(root fyne.App, home fyne.Window) {
 		category = choice
 	})
 
+	currentDenom, err := datamng.GetCurrency()
+
+	if err != nil {
+		Popup(root, window, "Cannot get currency", true)
+
+		return
+	}
+
+	denomLabel := widget.NewLabel(fmt.Sprintf("Currency = %v", currentDenom))
+	warning := widget.NewLabel("*Prefered currency is set in Preferences")
+	warning.TextStyle = fyne.TextStyle{Italic: true}
 	// Set content
 	window.SetContent(container.NewVBox(
 		// Add title and entry fields
@@ -60,9 +63,9 @@ func ExpenseAdditionWindow(root fyne.App, home fyne.Window) {
 		expenseTitle,
 		expenseCost,
 
-		// Add denomination otpions
-		widget.NewLabel("Denomination"),
-		denoms,
+		// Print current denomination and give an option to change it
+		denomLabel,
+		warning,
 
 		// Add category options
 		widget.NewLabel("Categories"),
@@ -70,45 +73,54 @@ func ExpenseAdditionWindow(root fyne.App, home fyne.Window) {
 
 		// Submit input
 		widget.NewButton("Submit", func() {
+			// If the user didn't enter expense's title
 			if len(expenseTitle.Text) == 0 {
 				Popup(root, window, "Please enter the expense's name", true)
 
 				return
 			}
 
+			// If the user didn't enter expense's cost
 			if len(expenseCost.Text) == 0 {
 				Popup(root, window, "Please enter expense's cost", true)
 
 				return
 			}
 
+			// If the user didn't choose a category
 			if len(category) == 0 {
 				Popup(root, window, "Pleasxe select a category", true)
 
 				return
 			}
 
-			if len(denomination) == 0 {
-				Popup(root, window, "Please select a denomination", false)
-
-				return
-			}
-
+			// Try to convert cost input into a float64
 			cost, err := strconv.ParseFloat(expenseCost.Text, 64)
 
+			// If it cannot be converted
 			if err != nil {
+				// Send an error message
 				Popup(root, window, "Please enter the expense's cost as a number", true)
 
 				return
 			}
 
-			expense := datamng.NewExpense(expenseTitle.Text, category, denomination, cost)
+			// Create a new expense object
+			expense, _ := datamng.NewExpense(expenseTitle.Text, category, cost)
 
-			err = datamng.Add(expense)
+			// Try to add the expense into the database
+			err = expense.Add(expense)
 
+			// If it cannot be added
 			if err != nil {
+				// Send an error message
 				Popup(root, window, "Couldn't add expense", true)
+
+				return
 			}
+
+			// If everything goes right, send a success message
+			Popup(root, window, "Expense added succesfully", false)
 		}),
 
 		widget.NewButton("Home", func() {

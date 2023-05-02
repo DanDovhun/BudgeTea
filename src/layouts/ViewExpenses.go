@@ -1,6 +1,9 @@
 package layouts
 
 import (
+	"BudgeTea/datamng"
+	"BudgeTea/maths"
+	"BudgeTea/report"
 	"fmt"
 	"time"
 
@@ -35,7 +38,7 @@ func pastMonthReport(root fyne.App, home fyne.Window) {
 
 		// Submits the input
 		widget.NewButton("Submit", func() {
-			// To be implemented
+			Popup(root, window, "To be implemented", false)
 		}),
 	))
 
@@ -53,7 +56,7 @@ func createReport(root fyne.App, home fyne.Window) {
 	window.SetContent(container.NewVBox(
 		// Export current month's spending report
 		widget.NewButton("This month's spending", func() {
-			// To be implemented
+			Popup(root, window, "To be implemented", false)
 		}),
 
 		// Export spending report from any previous month
@@ -63,7 +66,7 @@ func createReport(root fyne.App, home fyne.Window) {
 
 		// Exports the entire spending history
 		widget.NewButton("Whole spending history", func() {
-			// To be implemented
+			Popup(root, window, "To be implemented", false)
 		}),
 	))
 
@@ -88,23 +91,51 @@ func ViewExpensesLayout(root fyne.App, home fyne.Window) {
 	title.Alignment = fyne.TextAlignCenter
 	title.TextStyle = fyne.TextStyle{Bold: true}
 
+	info, err := report.GetThisMonthsExpenses()
+
+	if err != nil {
+		Popup(root, home, "Cannot get expenses", true)
+		return
+	}
+
+	currency, err := datamng.GetCurrency()
+
+	if err != nil {
+		Popup(root, home, "Cannot get currency", true)
+		return
+	}
+
+	var spending string
+
+	if info.Budget > info.TotalSpending {
+		under := info.Budget - info.TotalSpending
+		percentage := (under / info.Budget) * 100
+		spending = fmt.Sprintf("%v %v less than the budget (%v", maths.Round(info.Budget-info.TotalSpending, 2),
+			currency, maths.Round(percentage, 2)) + "% under budget)"
+	} else {
+		over := info.TotalSpending - info.Budget
+		percentage := (over / info.Budget) * 100
+		spending = fmt.Sprintf("%v %v above the budget (%v", maths.Round(over, 2),
+			currency, maths.Round(percentage, 2)) + "% above budget)"
+	}
+
 	// Fill the window with the content
 	window.SetContent(container.NewVBox(
 		// Add title
 		title,
 
 		// Displays the budget, money spet that month spending and whether the user went over the budget
-		widget.NewLabel("Budget: "),
-		widget.NewLabel("Money spent: "),
-		widget.NewLabel("n less then the budget (p%)"),
+		widget.NewLabel(fmt.Sprintf("Budget: %v", info.Budget)),
+		widget.NewLabel(fmt.Sprintf("Money spent: %v", maths.Round(info.TotalSpending, 2))),
+		widget.NewLabel(spending),
 
 		// Display spending by category
-		widget.NewLabel("Grocieries: "),
-		widget.NewLabel("Hobbies: "),
-		widget.NewLabel("Rent: "),
-		widget.NewLabel("Other bills: "),
-		widget.NewLabel("Travel: "),
-		widget.NewLabel("Miscelanious: "),
+		widget.NewLabel(fmt.Sprintf("Grocieries: %v %v", maths.Round(info.Groceries, 2), currency)),
+		widget.NewLabel(fmt.Sprintf("Hobbies: %v %v", maths.Round(info.Hobbies, 2), currency)),
+		widget.NewLabel(fmt.Sprintf("Rent: %v %v", maths.Round(info.Rent, 2), currency)),
+		widget.NewLabel(fmt.Sprintf("Travel: %v %v", maths.Round(info.Travel, 2), currency)),
+		widget.NewLabel(fmt.Sprintf("Miscelanious: %v %v", maths.Round(info.Miscelanious, 2), currency)),
+		widget.NewLabel(fmt.Sprintf("Other bills: %v %v", maths.Round(info.OtherBills, 2), currency)),
 
 		// Option to create a spending report
 		widget.NewButton("Create a report", func() {
