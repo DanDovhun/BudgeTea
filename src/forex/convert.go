@@ -9,13 +9,11 @@ import (
 )
 
 type Value struct {
-	Euro    float64 `json:"EUR"`
-	Dollars float64 `json:"USD"`
-	Kronar  float64 `json:"SEK"`
-}
-
-type Response struct {
-	Data Value `json:"data"`
+	From   string  `json:"base"`
+	To     string  `json:"to"`
+	OrgAmt float64 `json:"amount"`
+	CvtAmt float64 `json:"converted"`
+	Rate   float64 `json:"rate"`
 }
 
 type Rates struct {
@@ -23,18 +21,41 @@ type Rates struct {
 	Second float64
 }
 
-const API_KEY string = "g6cMYaCD3g8QIpqp9z8pQK5piOd82ROCY16uSU7P"
+const API_KEY string = "k90svvlpccoa0bdn1e01ebh6d6n1nfgorbb5fb8oma8pk3gh5prjoo"
+
+func getRate(from, to string) (float64, error) {
+	result, err := http.Get(fmt.Sprintf("https://anyapi.io/api/v1/exchange/convert?apiKey=%v&base=%v&to=%v&amount=%v", API_KEY, from, to, 1))
+
+	if err != nil {
+		return 0, err
+	}
+
+	response, err := ioutil.ReadAll(result.Body)
+
+	if err != nil {
+		return 0, err
+	}
+
+	var value Value
+	var conversionRate float64
+
+	json.Unmarshal(response, &value)
+
+	conversionRate = value.Rate
+
+	return conversionRate, nil
+}
 
 func GetRates(to string) (Rates, error) {
 	switch to {
 	case "SEK":
-		euro, err := Convert("EUR", to, 1)
+		euro, err := getRate("EUR", to)
 
 		if err != nil {
 			return Rates{}, err
 		}
 
-		dollars, err := Convert("USD", to, 1)
+		dollars, err := getRate("USD", to)
 
 		return Rates{
 			First:  euro,
@@ -42,13 +63,13 @@ func GetRates(to string) (Rates, error) {
 		}, nil
 
 	case "EUR":
-		sek, err := Convert("SEK", to, 1)
+		sek, err := getRate("SEK", to)
 
 		if err != nil {
 			return Rates{}, err
 		}
 
-		dollars, err := Convert("USD", to, 1)
+		dollars, err := getRate("USD", to)
 
 		return Rates{
 			First:  sek,
@@ -56,13 +77,13 @@ func GetRates(to string) (Rates, error) {
 		}, nil
 
 	case "USD":
-		euro, err := Convert("EUR", to, 1)
+		euro, err := getRate("EUR", to)
 
 		if err != nil {
 			return Rates{}, err
 		}
 
-		sek, err := Convert("SEK", to, 1)
+		sek, err := getRate("SEK", to)
 
 		return Rates{
 			First:  euro,
@@ -75,7 +96,7 @@ func GetRates(to string) (Rates, error) {
 }
 
 func Convert(from, to string, amount float64) (float64, error) {
-	result, err := http.Get(fmt.Sprintf("https://api.freecurrencyapi.com/v1/latest?apikey=%v&currencies=%v&base_currency=%v", API_KEY, to, from))
+	result, err := http.Get(fmt.Sprintf("https://anyapi.io/api/v1/exchange/convert?apiKey=%v&base=%v&to=%v&amount=%v", API_KEY, from, to, amount))
 
 	if err != nil {
 		return 0, err
@@ -87,24 +108,16 @@ func Convert(from, to string, amount float64) (float64, error) {
 		return 0, err
 	}
 
-	var value Response
+	var value Value
 	var conversion float64
 
 	json.Unmarshal(response, &value)
 
 	fmt.Println(err)
 
-	if to == "EUR" {
-		conversion = value.Data.Euro * amount
-	}
+	conversion = value.CvtAmt
 
-	if to == "USD" {
-		conversion = value.Data.Dollars * amount
-	}
-
-	if to == "SEK" {
-		conversion = value.Data.Kronar * amount
-	}
+	fmt.Println(conversion)
 
 	return conversion, nil
 }
