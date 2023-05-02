@@ -23,6 +23,7 @@ type Rates struct {
 
 const API_KEY string = "k90svvlpccoa0bdn1e01ebh6d6n1nfgorbb5fb8oma8pk3gh5prjoo"
 
+// Gets conversion rate between two currencies
 func getRate(from, to string) (float64, error) {
 	result, err := http.Get(fmt.Sprintf("https://anyapi.io/api/v1/exchange/convert?apiKey=%v&base=%v&to=%v&amount=%v", API_KEY, from, to, 1))
 
@@ -46,6 +47,7 @@ func getRate(from, to string) (float64, error) {
 	return conversionRate, nil
 }
 
+// Get rates between preferred currrency and other supported currencies
 func GetRates(to string) (Rates, error) {
 	switch to {
 	case "SEK":
@@ -95,29 +97,29 @@ func GetRates(to string) (Rates, error) {
 	}
 }
 
+// Converts between currencies
 func Convert(from, to string, amount float64) (float64, error) {
+	// Connect to the API
 	result, err := http.Get(fmt.Sprintf("https://anyapi.io/api/v1/exchange/convert?apiKey=%v&base=%v&to=%v&amount=%v", API_KEY, from, to, amount))
 
-	if err != nil {
+	if err != nil { // If API cannot be reached
 		return 0, err
 	}
 
+	// Reads the response as bytes
 	response, err := ioutil.ReadAll(result.Body)
 
 	if err != nil {
 		return 0, err
 	}
 
-	var value Value
-	var conversion float64
+	var value Value        // Stores the response as a struct
+	var conversion float64 // Holds the converted value
 
+	// Read the response into struct
 	json.Unmarshal(response, &value)
 
-	fmt.Println(err)
+	conversion = value.CvtAmt // Store converted value as a variable
 
-	conversion = value.CvtAmt
-
-	fmt.Println(conversion)
-
-	return conversion, nil
+	return conversion, nil // return the converted value
 }
