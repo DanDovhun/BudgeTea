@@ -38,7 +38,7 @@ func pastMonthReport(root fyne.App, home fyne.Window) {
 
 		// Submits the input
 		widget.NewButton("Submit", func() {
-			// To be implemented
+			Popup(root, window, "To be implemented", false)
 		}),
 	))
 
@@ -56,7 +56,7 @@ func createReport(root fyne.App, home fyne.Window) {
 	window.SetContent(container.NewVBox(
 		// Export current month's spending report
 		widget.NewButton("This month's spending", func() {
-			// To be implemented
+			Popup(root, window, "To be implemented", false)
 		}),
 
 		// Export spending report from any previous month
@@ -66,7 +66,7 @@ func createReport(root fyne.App, home fyne.Window) {
 
 		// Exports the entire spending history
 		widget.NewButton("Whole spending history", func() {
-			// To be implemented
+			Popup(root, window, "To be implemented", false)
 		}),
 	))
 
