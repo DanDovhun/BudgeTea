@@ -1,18 +1,664 @@
 {
-    "budget": 500,
+    "budget": 5000,
     "denomination": "SEK",
     "months": [
         {
-            "budget": 500,
-            "total_spending": 0,
+            "budget": 5000,
+            "total_spending": 4410,
             "year": 2023,
-            "month": 4,
-            "groceries": [],
-            "hobbies": [],
-            "rent": [],
-            "other_bills": [],
-            "travel": [],
-            "miscalenious": []
+            "month": 5,
+            "groceries": [
+                {
+                    "Name": "Test 01",
+                    "Category": "Groceries",
+                    "Price": 250,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 07",
+                    "Category": "Groceries",
+                    "Price": 35,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 16",
+                    "Category": "Groceries",
+                    "Price": 12,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 20",
+                    "Category": "Groceries",
+                    "Price": 345,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 01",
+                    "Category": "Groceries",
+                    "Price": 250,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 07",
+                    "Category": "Groceries",
+                    "Price": 35,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 16",
+                    "Category": "Groceries",
+                    "Price": 12,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 20",
+                    "Category": "Groceries",
+                    "Price": 345,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 01",
+                    "Category": "Groceries",
+                    "Price": 250,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 07",
+                    "Category": "Groceries",
+                    "Price": 35,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 16",
+                    "Category": "Groceries",
+                    "Price": 12,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 20",
+                    "Category": "Groceries",
+                    "Price": 345,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 01",
+                    "Category": "Groceries",
+                    "Price": 250,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 07",
+                    "Category": "Groceries",
+                    "Price": 35,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 16",
+                    "Category": "Groceries",
+                    "Price": 12,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 20",
+                    "Category": "Groceries",
+                    "Price": 345,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                }
+            ],
+            "hobbies": [
+                {
+                    "Name": "Test 02",
+                    "Category": "Hobbies",
+                    "Price": 198,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 04",
+                    "Category": "Hobbies",
+                    "Price": 365,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 14",
+                    "Category": "Hobbies",
+                    "Price": 23,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 17",
+                    "Category": "Hobbies",
+                    "Price": 65,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 02",
+                    "Category": "Hobbies",
+                    "Price": 198,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 04",
+                    "Category": "Hobbies",
+                    "Price": 365,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 14",
+                    "Category": "Hobbies",
+                    "Price": 23,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 17",
+                    "Category": "Hobbies",
+                    "Price": 65,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 02",
+                    "Category": "Hobbies",
+                    "Price": 198,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 04",
+                    "Category": "Hobbies",
+                    "Price": 365,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 14",
+                    "Category": "Hobbies",
+                    "Price": 23,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 17",
+                    "Category": "Hobbies",
+                    "Price": 65,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 02",
+                    "Category": "Hobbies",
+                    "Price": 198,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 04",
+                    "Category": "Hobbies",
+                    "Price": 365,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 14",
+                    "Category": "Hobbies",
+                    "Price": 23,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 17",
+                    "Category": "Hobbies",
+                    "Price": 65,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                }
+            ],
+            "rent": [
+                {
+                    "Name": "Test 05",
+                    "Category": "Rent",
+                    "Price": 65,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 09",
+                    "Category": "Rent",
+                    "Price": 1200,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 19",
+                    "Category": "Rent",
+                    "Price": 65,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 13",
+                    "Category": "Rent",
+                    "Price": 1200,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 05",
+                    "Category": "Rent",
+                    "Price": 65,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 09",
+                    "Category": "Rent",
+                    "Price": 1200,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 19",
+                    "Category": "Rent",
+                    "Price": 65,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 13",
+                    "Category": "Rent",
+                    "Price": 1200,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 05",
+                    "Category": "Rent",
+                    "Price": 65,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 09",
+                    "Category": "Rent",
+                    "Price": 1200,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 19",
+                    "Category": "Rent",
+                    "Price": 65,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 13",
+                    "Category": "Rent",
+                    "Price": 1200,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 05",
+                    "Category": "Rent",
+                    "Price": 65,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 09",
+                    "Category": "Rent",
+                    "Price": 1200,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 19",
+                    "Category": "Rent",
+                    "Price": 65,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 13",
+                    "Category": "Rent",
+                    "Price": 1200,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                }
+            ],
+            "other_bills": [
+                {
+                    "Name": "Test 03",
+                    "Category": "Other bills",
+                    "Price": 25,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 06",
+                    "Category": "Other bills",
+                    "Price": 57,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 08",
+                    "Category": "Other bills",
+                    "Price": 135,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 11",
+                    "Category": "Other bills",
+                    "Price": 30,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 03",
+                    "Category": "Other bills",
+                    "Price": 25,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 06",
+                    "Category": "Other bills",
+                    "Price": 57,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 08",
+                    "Category": "Other bills",
+                    "Price": 135,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 11",
+                    "Category": "Other bills",
+                    "Price": 30,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 03",
+                    "Category": "Other bills",
+                    "Price": 25,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 06",
+                    "Category": "Other bills",
+                    "Price": 57,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 08",
+                    "Category": "Other bills",
+                    "Price": 135,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 11",
+                    "Category": "Other bills",
+                    "Price": 30,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 03",
+                    "Category": "Other bills",
+                    "Price": 25,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 06",
+                    "Category": "Other bills",
+                    "Price": 57,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 08",
+                    "Category": "Other bills",
+                    "Price": 135,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 11",
+                    "Category": "Other bills",
+                    "Price": 30,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                }
+            ],
+            "travel": [
+                {
+                    "Name": "Test 12",
+                    "Category": "Travel",
+                    "Price": 100,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 15",
+                    "Category": "Travel",
+                    "Price": 133,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 12",
+                    "Category": "Travel",
+                    "Price": 100,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 15",
+                    "Category": "Travel",
+                    "Price": 133,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 12",
+                    "Category": "Travel",
+                    "Price": 100,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 15",
+                    "Category": "Travel",
+                    "Price": 133,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 12",
+                    "Category": "Travel",
+                    "Price": 100,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 15",
+                    "Category": "Travel",
+                    "Price": 133,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                }
+            ],
+            "miscalenious": [
+                {
+                    "Name": "Test 18",
+                    "Category": "Miscelanious",
+                    "Price": 43,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 19",
+                    "Category": "Miscelanious",
+                    "Price": 64,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 18",
+                    "Category": "Miscelanious",
+                    "Price": 43,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 19",
+                    "Category": "Miscelanious",
+                    "Price": 64,
+                    "Denomination": "USD",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 18",
+                    "Category": "Miscelanious",
+                    "Price": 43,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 19",
+                    "Category": "Miscelanious",
+                    "Price": 64,
+                    "Denomination": "EUR",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 18",
+                    "Category": "Miscelanious",
+                    "Price": 43,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                },
+                {
+                    "Name": "Test 19",
+                    "Category": "Miscelanious",
+                    "Price": 64,
+                    "Denomination": "SEK",
+                    "Day": 2,
+                    "Date": "2-May-2023"
+                }
+            ]
         }
     ]
 }

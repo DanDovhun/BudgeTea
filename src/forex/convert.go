@@ -2,6 +2,7 @@ package forex
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -17,10 +18,64 @@ type Response struct {
 	Data Value `json:"data"`
 }
 
-const APi_KEY string = "g6cMYaCD3g8QIpqp9z8pQK5piOd82ROCY16uSU7P"
+type Rates struct {
+	First  float64
+	Second float64
+}
+
+const API_KEY string = "g6cMYaCD3g8QIpqp9z8pQK5piOd82ROCY16uSU7P"
+
+func GetRates(to string) (Rates, error) {
+	switch to {
+	case "SEK":
+		euro, err := Convert("EUR", to, 1)
+
+		if err != nil {
+			return Rates{}, err
+		}
+
+		dollars, err := Convert("USD", to, 1)
+
+		return Rates{
+			First:  euro,
+			Second: dollars,
+		}, nil
+
+	case "EUR":
+		sek, err := Convert("SEK", to, 1)
+
+		if err != nil {
+			return Rates{}, err
+		}
+
+		dollars, err := Convert("USD", to, 1)
+
+		return Rates{
+			First:  sek,
+			Second: dollars,
+		}, nil
+
+	case "USD":
+		euro, err := Convert("EUR", to, 1)
+
+		if err != nil {
+			return Rates{}, err
+		}
+
+		sek, err := Convert("SEK", to, 1)
+
+		return Rates{
+			First:  euro,
+			Second: sek,
+		}, nil
+
+	default:
+		return Rates{}, errors.New("Invalid currency")
+	}
+}
 
 func Convert(from, to string, amount float64) (float64, error) {
-	result, err := http.Get(fmt.Sprintf("https://api.freecurrencyapi.com/v1/latest?apikey=%v&currencies=%v&base_currency=%v", APi_KEY, to, from))
+	result, err := http.Get(fmt.Sprintf("https://api.freecurrencyapi.com/v1/latest?apikey=%v&currencies=%v&base_currency=%v", API_KEY, to, from))
 
 	if err != nil {
 		return 0, err
@@ -37,21 +92,18 @@ func Convert(from, to string, amount float64) (float64, error) {
 
 	json.Unmarshal(response, &value)
 
-	fmt.Println(value.Data.Euro)
-	fmt.Println(value.Data.Dollars)
-	fmt.Println(value.Data.Kronar)
-	fmt.Println(amount)
+	fmt.Println(err)
 
-	if from == "EUR" {
+	if to == "EUR" {
 		conversion = value.Data.Euro * amount
 	}
 
-	if from == "USD" {
-		conversion = value.Data.Euro * amount
+	if to == "USD" {
+		conversion = value.Data.Dollars * amount
 	}
 
-	if from == "SEK" {
-		conversion = value.Data.Euro * amount
+	if to == "SEK" {
+		conversion = value.Data.Kronar * amount
 	}
 
 	return conversion, nil

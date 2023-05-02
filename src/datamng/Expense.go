@@ -110,3 +110,7 @@ func (ex Expense) Add(expense Expense) error {
 	// Do not return errors
 	return nil
 }
+
+func (ex *Expense) SetPrice(price float64) {
+	ex.Price = price
+}

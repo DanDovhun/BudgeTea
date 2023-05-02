@@ -15,6 +15,23 @@ type Data struct {
 	Months       []Month `json:"months"`
 }
 
+func GetData() (Data, error) {
+	data, err := os.Open("expenses.json") // Open the json file
+	var months Data                       // The loaded data will be stored here
+
+	// If the file couldn't be opened
+	if err != nil {
+		return Data{}, err // Return the error
+	}
+
+	byteValue, _ := ioutil.ReadAll(data) //Read the file as []bytes
+	json.Unmarshal(byteValue, &months)   // Store the bytes in the months
+
+	data.Close()
+
+	return months, nil
+}
+
 // Searches for a specific month
 func (data Data) FindMonthByYear(month time.Month, year int) int {
 	// Iterate through months
@@ -40,18 +57,11 @@ func (data *Data) SetCurrency(currency string) {
 
 // Gets budget from the db
 func GetBudget() (float64, error) {
-	data, err := os.Open("expenses.json") // Open the json file
-	var months Data                       // The loaded data will be stored here
+	data, err := GetData()
 
-	// If the file couldn't be opened
 	if err != nil {
-		return 0, err // Return the error
+		return 0, err
 	}
 
-	byteValue, _ := ioutil.ReadAll(data) //Read the file as []bytes
-	json.Unmarshal(byteValue, &months)   // Store the bytes in the months
-
-	data.Close()
-
-	return months.Budget, nil
+	return data.Budget, nil
 }

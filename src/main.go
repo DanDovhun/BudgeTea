@@ -4,16 +4,43 @@
 package main
 
 import (
+	"io/ioutil"
+	"os"
+	"strconv"
+	"strings"
+
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/container"
 	"fyne.io/fyne/widget"
 
+	"BudgeTea/datamng"
 	"BudgeTea/forex"
 	"BudgeTea/layouts"
 )
 
+func fillup() {
+	fl, err := os.Open("datamng_test/test_cases.txt")
+
+	if err != nil {
+		return
+	}
+
+	bytes, err := ioutil.ReadAll(fl)
+
+	arr := strings.Split(string(bytes), "\n")
+
+	for _, i := range arr {
+		ex := strings.Split(i, ",")
+
+		price, _ := strconv.ParseFloat(ex[1], 64)
+		data, _ := datamng.NewExpense(ex[0], ex[2], price)
+		data.Add(data)
+	}
+}
+
 func main() { // Main function
+	fillup()
 	_, notConnected := forex.Convert("SEK", "USD", 100)
 
 	root := app.New()                  // Create an application instance

@@ -1,0 +1,20 @@
+Test 01,250,Groceries
+Test 02,198,Hobbies
+Test 03,25,Other bills
+Test 04,365,Hobbies
+Test 05,65,Rent
+Test 06,57,Other bills
+Test 07,35,Groceries
+Test 08,135,Other bills
+Test 09,1200,Rent
+Test 19,65,Rent
+Test 11,30,Other bills
+Test 12,100,Travel
+Test 13,1200,Rent
+Test 14,23,Hobbies
+Test 15,133,Travel
+Test 16,12,Groceries
+Test 17,65,Hobbies
+Test 18,43,Miscelanious
+Test 19,64,Miscelanious
+Test 20,345,Groceries
