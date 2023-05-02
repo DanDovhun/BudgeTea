@@ -125,8 +125,8 @@ func ViewExpensesLayout(root fyne.App, home fyne.Window) {
 		title,
 
 		// Displays the budget, money spet that month spending and whether the user went over the budget
-		widget.NewLabel(fmt.Sprintf("Budget: %v", info.Budget)),
-		widget.NewLabel(fmt.Sprintf("Money spent: %v", maths.Round(info.TotalSpending, 2))),
+		widget.NewLabel(fmt.Sprintf("Budget: %v %v", info.Budget, currency)),
+		widget.NewLabel(fmt.Sprintf("Money spent: %v %v", maths.Round(info.TotalSpending, 2), currency)),
 		widget.NewLabel(spending),
 
 		// Display spending by category

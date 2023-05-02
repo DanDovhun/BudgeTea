@@ -35,11 +35,12 @@ The user will be able to edit their budget and preferred denomination.
 
 ## Entity Relationship Diagram
 Diagram showing between multiple entities in the database
-![ER Diagram](images/ER%20Diagram.drawio(1).png)
+![ER Diagram](images/ER_Diagram.png)
 
 ## Tools:
-The backend of BudgeTea is built using Go with Fyne as the front end library. BudgeTea is also using JSON to store data.
-Currency conversion api: https://anyapi.io/app/currency-exchange-api#try
+- Programming language: [GoLang](https://go.dev/)
+- Front-end library: [fyne](https://fyne.io)
+- Forex API: AnyAPI, [Free Currency Exchange and Forex API](https://anyapi.io/currency-exchange-api)
 
 ## Binaries
 Binaries (executable files) for Windows and Linux will be found in the ***binaries*** folder
