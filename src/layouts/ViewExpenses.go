@@ -108,7 +108,8 @@ func ViewExpensesLayout(root fyne.App, home fyne.Window) {
 	var spending string
 
 	if info.Budget > info.TotalSpending {
-		percentage := (info.TotalSpending / info.Budget) * 100
+		under := info.Budget - info.TotalSpending
+		percentage := (under / info.Budget) * 100
 		spending = fmt.Sprintf("%v %v less than the budget (%v", maths.Round(info.Budget-info.TotalSpending, 2),
 			currency, maths.Round(percentage, 2)) + "% under budget)"
 	} else {
