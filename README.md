@@ -35,7 +35,7 @@ The user will be able to edit their budget and preferred denomination.
 
 ## Entity Relationship Diagram
 Diagram showing between multiple entities in the database
-![ER Diagram](images/ER%20Diagram.drawio(1).png)
+![ER Diagram](images/ER_Diagram.png)
 
 ## Tools:
 - Programming language: [GoLang](https://go.dev/)
