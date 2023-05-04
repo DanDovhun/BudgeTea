@@ -3,7 +3,6 @@ package report
 import (
 	"BudgeTea/datamng"
 	"BudgeTea/forex"
-	"fmt"
 )
 
 // Holds spending report data
@@ -18,9 +17,54 @@ type ExpenseReport struct {
 	OtherBills    float64
 }
 
+type ExpenseList struct {
+	Report ExpenseReport
+	Month  datamng.Month
+}
+
+func ExportCurrentExpenses() error {
+	return nil
+}
+
 // Converts expense's currency to user's preferred currency
 func convert(from string, amount, rate float64) float64 {
 	return amount * rate
+}
+
+func calculatePrice(currency string, expense datamng.Expense, conRates forex.Rates) float64 {
+	var newPrice float64
+
+	// If the currency is set to SEK and the price is in euros
+	if expense.Denomination == "EUR" && currency == "SEK" {
+		newPrice = convert("EUR", expense.Price, conRates.First)
+	}
+
+	// If the currency is set to SEK and the price is in us dollars
+	if expense.Denomination == "USD" && currency == "SEK" {
+		newPrice = convert("USD", expense.Price, conRates.Second)
+	}
+
+	// If the currency is set to EUR and the price is in swedish kronar
+	if expense.Denomination == "SEK" && currency == "EUR" {
+		newPrice = convert("SEK", expense.Price, conRates.First)
+	}
+
+	// If the currency is set to EUR and the price is in us dollars
+	if expense.Denomination == "USD" && currency == "EUR" {
+		newPrice = convert("USD", expense.Price, conRates.Second)
+	}
+
+	// If the currency is set to EUR and the price is in swedish kronar
+	if expense.Denomination == "SEK" && currency == "USD" {
+		newPrice = convert("SEK", expense.Price, conRates.Second)
+	}
+
+	// If the currency is set to EUR and the price is in us dollars
+	if expense.Denomination == "EUR" && currency == "USD" {
+		newPrice = convert("USD", expense.Price, conRates.First)
+	}
+
+	return newPrice
 }
 
 // Get expense report for current month
@@ -33,7 +77,7 @@ func GetThisMonthsExpenses() (ExpenseReport, error) {
 	}
 
 	//Get current month
-	month := data.Months[len(data.Months)-1]
+	month := data.GetLastMonth()
 
 	// Get user's preferred currency
 	currency, err := datamng.GetCurrency()
@@ -56,39 +100,7 @@ func GetThisMonthsExpenses() (ExpenseReport, error) {
 		// If it's different currency than current user's preference
 		if expense.Denomination != currency {
 			// Convert it to the user's preferred currency
-			var newPrice float64
-
-			// If the currency is set to SEK and the price is in euros
-			if expense.Denomination == "EUR" && currency == "SEK" {
-				newPrice = convert("EUR", expense.Price, conversionRates.First)
-			}
-
-			// If the currency is set to SEK and the price is in us dollars
-			if expense.Denomination == "USD" && currency == "SEK" {
-				newPrice = convert("USD", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in swedish kronar
-			if expense.Denomination == "SEK" && currency == "EUR" {
-				newPrice = convert("SEK", expense.Price, conversionRates.First)
-			}
-
-			// If the currency is set to EUR and the price is in us dollars
-			if expense.Denomination == "USD" && currency == "EUR" {
-				newPrice = convert("USD", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in swedish kronar
-			if expense.Denomination == "SEK" && currency == "USD" {
-				newPrice = convert("SEK", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in us dollars
-			if expense.Denomination == "EUR" && currency == "USD" {
-				newPrice = convert("USD", expense.Price, conversionRates.First)
-			}
-
-			fmt.Println(newPrice)
+			newPrice := calculatePrice(currency, expense, conversionRates)
 
 			// Set new price
 			expense.SetPrice(newPrice)
@@ -104,37 +116,7 @@ func GetThisMonthsExpenses() (ExpenseReport, error) {
 		// If it's different currency than current user's preference
 		if expense.Denomination != currency {
 			// Convert it to the user's preferred currency
-			var newPrice float64
-
-			// If the currency is set to SEK and the price is in euros
-			if expense.Denomination == "EUR" && currency == "SEK" {
-				newPrice = convert("EUR", expense.Price, conversionRates.First)
-			}
-
-			// If the currency is set to SEK and the price is in us dollars
-			if expense.Denomination == "USD" && currency == "SEK" {
-				newPrice = convert("USD", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in swedish kronar
-			if expense.Denomination == "SEK" && currency == "EUR" {
-				newPrice = convert("SEK", expense.Price, conversionRates.First)
-			}
-
-			// If the currency is set to EUR and the price is in us dollars
-			if expense.Denomination == "USD" && currency == "EUR" {
-				newPrice = convert("USD", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in swedish kronar
-			if expense.Denomination == "SEK" && currency == "USD" {
-				newPrice = convert("SEK", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in us dollars
-			if expense.Denomination == "EUR" && currency == "USD" {
-				newPrice = convert("USD", expense.Price, conversionRates.First)
-			}
+			newPrice := calculatePrice(currency, expense, conversionRates)
 
 			// Set new price
 			expense.SetPrice(newPrice)
@@ -150,37 +132,7 @@ func GetThisMonthsExpenses() (ExpenseReport, error) {
 		// If it's different currency than current user's preference
 		if expense.Denomination != currency {
 			// Convert it to the user's preferred currency
-			var newPrice float64
-
-			// If the currency is set to SEK and the price is in euros
-			if expense.Denomination == "EUR" && currency == "SEK" {
-				newPrice = convert("EUR", expense.Price, conversionRates.First)
-			}
-
-			// If the currency is set to SEK and the price is in us dollars
-			if expense.Denomination == "USD" && currency == "SEK" {
-				newPrice = convert("USD", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in swedish kronar
-			if expense.Denomination == "SEK" && currency == "EUR" {
-				newPrice = convert("SEK", expense.Price, conversionRates.First)
-			}
-
-			// If the currency is set to EUR and the price is in us dollars
-			if expense.Denomination == "USD" && currency == "EUR" {
-				newPrice = convert("USD", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in swedish kronar
-			if expense.Denomination == "SEK" && currency == "USD" {
-				newPrice = convert("SEK", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in us dollars
-			if expense.Denomination == "EUR" && currency == "USD" {
-				newPrice = convert("USD", expense.Price, conversionRates.First)
-			}
+			newPrice := calculatePrice(currency, expense, conversionRates)
 
 			// Set new price
 			expense.SetPrice(newPrice)
@@ -196,37 +148,7 @@ func GetThisMonthsExpenses() (ExpenseReport, error) {
 		// If it's different currency than current user's preference
 		if expense.Denomination != currency {
 			// Convert it to the user's preferred currency
-			var newPrice float64
-
-			// If the currency is set to SEK and the price is in euros
-			if expense.Denomination == "EUR" && currency == "SEK" {
-				newPrice = convert("EUR", expense.Price, conversionRates.First)
-			}
-
-			// If the currency is set to SEK and the price is in us dollars
-			if expense.Denomination == "USD" && currency == "SEK" {
-				newPrice = convert("USD", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in swedish kronar
-			if expense.Denomination == "SEK" && currency == "EUR" {
-				newPrice = convert("SEK", expense.Price, conversionRates.First)
-			}
-
-			// If the currency is set to EUR and the price is in us dollars
-			if expense.Denomination == "USD" && currency == "EUR" {
-				newPrice = convert("USD", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in swedish kronar
-			if expense.Denomination == "SEK" && currency == "USD" {
-				newPrice = convert("SEK", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in us dollars
-			if expense.Denomination == "EUR" && currency == "USD" {
-				newPrice = convert("USD", expense.Price, conversionRates.First)
-			}
+			newPrice := calculatePrice(currency, expense, conversionRates)
 
 			// Set new price
 			expense.SetPrice(newPrice)
@@ -242,37 +164,7 @@ func GetThisMonthsExpenses() (ExpenseReport, error) {
 		// If it's different currency than current user's preference
 		if expense.Denomination != currency {
 			// Convert it to the user's preferred currency
-			var newPrice float64
-
-			// If the currency is set to SEK and the price is in euros
-			if expense.Denomination == "EUR" && currency == "SEK" {
-				newPrice = convert("EUR", expense.Price, conversionRates.First)
-			}
-
-			// If the currency is set to SEK and the price is in us dollars
-			if expense.Denomination == "USD" && currency == "SEK" {
-				newPrice = convert("USD", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in swedish kronar
-			if expense.Denomination == "SEK" && currency == "EUR" {
-				newPrice = convert("SEK", expense.Price, conversionRates.First)
-			}
-
-			// If the currency is set to EUR and the price is in us dollars
-			if expense.Denomination == "USD" && currency == "EUR" {
-				newPrice = convert("USD", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in swedish kronar
-			if expense.Denomination == "SEK" && currency == "USD" {
-				newPrice = convert("SEK", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in us dollars
-			if expense.Denomination == "EUR" && currency == "USD" {
-				newPrice = convert("USD", expense.Price, conversionRates.First)
-			}
+			newPrice := calculatePrice(currency, expense, conversionRates)
 
 			// Set new price
 			expense.SetPrice(newPrice)
@@ -288,37 +180,7 @@ func GetThisMonthsExpenses() (ExpenseReport, error) {
 		// If it's different currency than current user's preference
 		if expense.Denomination != currency {
 			// Convert it to the user's preferred currency
-			var newPrice float64
-
-			// If the currency is set to SEK and the price is in euros
-			if expense.Denomination == "EUR" && currency == "SEK" {
-				newPrice = convert("EUR", expense.Price, conversionRates.First)
-			}
-
-			// If the currency is set to SEK and the price is in us dollars
-			if expense.Denomination == "USD" && currency == "SEK" {
-				newPrice = convert("USD", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in swedish kronar
-			if expense.Denomination == "SEK" && currency == "EUR" {
-				newPrice = convert("SEK", expense.Price, conversionRates.First)
-			}
-
-			// If the currency is set to EUR and the price is in us dollars
-			if expense.Denomination == "USD" && currency == "EUR" {
-				newPrice = convert("USD", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in swedish kronar
-			if expense.Denomination == "SEK" && currency == "USD" {
-				newPrice = convert("SEK", expense.Price, conversionRates.Second)
-			}
-
-			// If the currency is set to EUR and the price is in us dollars
-			if expense.Denomination == "EUR" && currency == "USD" {
-				newPrice = convert("USD", expense.Price, conversionRates.First)
-			}
+			newPrice := calculatePrice(currency, expense, conversionRates)
 
 			// Set new price
 			expense.SetPrice(newPrice)

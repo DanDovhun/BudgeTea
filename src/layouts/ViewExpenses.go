@@ -56,7 +56,11 @@ func createReport(root fyne.App, home fyne.Window) {
 	window.SetContent(container.NewVBox(
 		// Export current month's spending report
 		widget.NewButton("This month's spending", func() {
-			Popup(root, window, "To be implemented", false)
+			err := report.ExportCurrentExpenses()
+
+			if err != nil {
+
+			}
 		}),
 
 		// Export spending report from any previous month
