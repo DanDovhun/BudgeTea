@@ -48,7 +48,7 @@ Binaries (executable files) for Windows and Linux will be found in the ***binari
 ## Build
 ### Prerequisits:
 - Download [GoLang](https://go.dev/dl/)
-- Download and setup [Fyne](https://developer.fyne.io/started/)
+- Setup prerequisits [Fyne](https://developer.fyne.io/started/) listed on their website
 
 ### Steps:
 1. Clone BudgeTea
