@@ -55,7 +55,7 @@ Binaries (executable files) for Windows and Linux will be found in the ***binari
    Either download it as zip or run `git clone https://github.com/DanDovhun/BudgetManager.git` in your terminal/command line
 
 2. Navigate into the directory
-   Using your command line run `cd /path/to/BudgeTea`
+   Using your command line run `cd /path/to/BudgeTea/src`
 3. Make sure that all dependencies are set up properly
    Execute these 3 commands:
 
