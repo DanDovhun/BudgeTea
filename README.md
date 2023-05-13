@@ -48,7 +48,7 @@ Binaries (executable files) for Windows and Linux will be found in the ***binari
 ## Build
 ### Prerequisits:
 - Download [GoLang](https://go.dev/dl/)
-- Setup prerequisits [Fyne](https://developer.fyne.io/started/) listed on their website
+- Setup prerequisits for [Fyne](https://developer.fyne.io/started/) listed on their website
 
 ### Steps:
 1. Clone BudgeTea
@@ -56,7 +56,6 @@ Binaries (executable files) for Windows and Linux will be found in the ***binari
 
 2. Navigate into the directory
    Using your command line run `cd /path/to/BudgeTea`
-
 3. Make sure that all dependencies are set up properly
    Execute these 3 commands:
 
