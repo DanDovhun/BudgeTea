@@ -1,6 +1,8 @@
 package layouts
 
 import (
+	"time"
+
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/widget"
@@ -31,4 +33,9 @@ func Popup(root fyne.App, home fyne.Window, message string, isError bool) {
 	// Set size and show the window
 	window.Resize(fyne.NewSize(300, 100))
 	window.Show()
+
+	if !isError {
+		time.Sleep(time.Second * 5)
+		window.Hide()
+	}
 }

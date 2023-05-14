@@ -1,4 +1,36 @@
 {
     "budget": 5000,
-    "denomination": "EUR"
+    "denomination": "EUR",
+    "months": [
+        {
+            "budget": 5000,
+            "total_spending": 4534548,
+            "year": 2023,
+            "month": 5,
+            "groceries": [
+                {
+                    "Name": "55",
+                    "Category": "Groceries",
+                    "Price": 5,
+                    "Denomination": "EUR",
+                    "Day": 14,
+                    "Date": "14-May-2023"
+                }
+            ],
+            "hobbies": [],
+            "rent": [
+                {
+                    "Name": "gfdsfg",
+                    "Category": "Rent",
+                    "Price": 4534543,
+                    "Denomination": "EUR",
+                    "Day": 14,
+                    "Date": "14-May-2023"
+                }
+            ],
+            "other_bills": [],
+            "travel": [],
+            "miscalenious": []
+        }
+    ]
 }
