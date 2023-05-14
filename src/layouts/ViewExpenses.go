@@ -5,11 +5,13 @@ import (
 	"BudgeTea/maths"
 	"BudgeTea/report"
 	"fmt"
+	"strings"
 	"time"
 
-	"fyne.io/fyne"
-	"fyne.io/fyne/container"
-	"fyne.io/fyne/widget"
+	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/dialog"
+	"fyne.io/fyne/v2/widget"
 )
 
 // Finds a month
@@ -56,11 +58,44 @@ func createReport(root fyne.App, home fyne.Window) {
 	window.SetContent(container.NewVBox(
 		// Export current month's spending report
 		widget.NewButton("This month's spending", func() {
-			err := report.ExportCurrentExpenses()
+			folderBrowser := root.NewWindow("Export expense report")
 
-			if err != nil {
+			year := time.Now().Local().Year()
+			month := time.Now().Local().Month()
 
-			}
+			fileTitle := fmt.Sprintf("%v-%v_Expense_Report", month, year)
+
+			fileName := widget.NewEntry()
+			fileName.SetText(fileTitle)
+			fileName.SetPlaceHolder("File name")
+
+			folderBrowser.SetContent(container.NewVBox(
+				fileName,
+
+				widget.NewButton("Save", func() {
+					folderBrowser.Hide()
+					name := fileName.Text
+
+					if len(name) == 0 {
+						Popup(root, folderBrowser, "Please enter file's name", true)
+
+						return
+					}
+
+					if !strings.Contains(name, ".csv") {
+						name += ".csv"
+					}
+
+					save := dialog.NewFileSave(func(w fyne.URIWriteCloser, e error) {
+						report.CreateLastMonthsReport(w, name)
+					}, window)
+
+					save.SetFileName(name)
+					save.Show()
+				}),
+			))
+
+			folderBrowser.Show()
 		}),
 
 		// Export spending report from any previous month

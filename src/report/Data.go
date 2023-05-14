@@ -91,7 +91,12 @@ func GetThisMonthsExpenses() (ExpenseReport, error) {
 	expenses.Budget = data.Budget
 	expenses.TotalSpending = month.TotalSpending
 
+	// Get conversion rates
 	conversionRates, err := forex.GetRates(data.Denomination)
+
+	if err != nil {
+		return ExpenseReport{}, err
+	}
 
 	// Normalise all grocery expenses to be the same price
 	for _, i := range month.Groceries {

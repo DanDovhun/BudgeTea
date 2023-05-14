@@ -1,9 +1,9 @@
 package layouts
 
 import (
-	"fyne.io/fyne"
-	"fyne.io/fyne/container"
-	"fyne.io/fyne/widget"
+	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/widget"
 )
 
 // A popup window in case something happens (error, warning...)

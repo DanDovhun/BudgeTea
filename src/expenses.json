@@ -1,4 +1,60 @@
 {
-    "budget": 500,
-    "denomination": "EUR"
+    "budget": 5000,
+    "denomination": "EUR",
+    "months": [
+        {
+            "budget": 5000,
+            "total_spending": 111.9393,
+            "year": 2023,
+            "month": 5,
+            "groceries": [
+                {
+                    "Name": "4",
+                    "Category": "Groceries",
+                    "Price": 3,
+                    "Denomination": "EUR",
+                    "Day": 6,
+                    "Date": "6-May-2023"
+                },
+                {
+                    "Name": "TT",
+                    "Category": "Groceries",
+                    "Price": 23,
+                    "Denomination": "EUR",
+                    "Day": 14,
+                    "Date": "14-May-2023"
+                },
+                {
+                    "Name": "TT",
+                    "Category": "Groceries",
+                    "Price": 23,
+                    "Denomination": "EUR",
+                    "Day": 14,
+                    "Date": "14-May-2023"
+                },
+                {
+                    "Name": "TT",
+                    "Category": "Groceries",
+                    "Price": 40,
+                    "Denomination": "EUR",
+                    "Day": 14,
+                    "Date": "14-May-2023"
+                }
+            ],
+            "hobbies": [],
+            "rent": [],
+            "other_bills": [
+                {
+                    "Name": "TT",
+                    "Category": "Other bills",
+                    "Price": 23,
+                    "Denomination": "EUR",
+                    "Day": 14,
+                    "Date": "14-May-2023"
+                }
+            ],
+            "travel": [],
+            "miscalenious": []
+        }
+    ]
 }
