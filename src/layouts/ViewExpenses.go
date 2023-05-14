@@ -73,6 +73,7 @@ func createReport(root fyne.App, home fyne.Window) {
 				fileName,
 
 				widget.NewButton("Save", func() {
+					window.Resize(fyne.NewSize(600, 400))
 					folderBrowser.Hide()
 					name := fileName.Text
 
@@ -86,8 +87,43 @@ func createReport(root fyne.App, home fyne.Window) {
 						name += ".csv"
 					}
 
-					save := dialog.NewFileSave(func(w fyne.URIWriteCloser, e error) {
-						report.CreateLastMonthsReport(w, name)
+					var save *dialog.FileDialog = new(dialog.FileDialog)
+
+					save = dialog.NewFileSave(func(w fyne.URIWriteCloser, e error) {
+						window.Hide()
+						if w == nil {
+							return
+						}
+
+						if e != nil {
+							return
+						}
+
+						data, err := datamng.GetData()
+
+						if err != nil {
+							Popup(root, window, "Unexpected error", true)
+
+							return
+						}
+
+						month := data.GetLastMonth()
+
+						normal, err := report.NormaliseExpenses(month, data.Denomination)
+
+						if err != nil {
+							Popup(root, window, "Unexpected error", true)
+
+							return
+						}
+
+						list := report.CreateOneMonthReport(normal, data.Denomination)
+
+						w.Write([]byte(list))
+
+						Popup(root, home, fmt.Sprintf("Succesfully exported the report to %v", w.URI()), false)
+
+						window.Resize(fyne.NewSize(400, 120))
 					}, window)
 
 					save.SetFileName(name)
@@ -95,6 +131,7 @@ func createReport(root fyne.App, home fyne.Window) {
 				}),
 			))
 
+			folderBrowser.Resize(fyne.NewSize(350, 100))
 			folderBrowser.Show()
 		}),
 
