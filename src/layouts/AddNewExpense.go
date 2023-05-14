@@ -119,8 +119,12 @@ func ExpenseAdditionWindow(root fyne.App, home fyne.Window) {
 				return
 			}
 
+			home.SetMaster()
+			home.Show()
+			window.Hide()
+
 			// If everything goes right, send a success message
-			Popup(root, window, "Expense added succesfully", false)
+			Popup(root, home, "Expense added succesfully", false)
 		}),
 
 		widget.NewButton("Home", func() {
