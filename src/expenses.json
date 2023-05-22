@@ -4,31 +4,57 @@
     "months": [
         {
             "budget": 5000,
-            "total_spending": 4534548,
+            "total_spending": 1918,
             "year": 2023,
             "month": 5,
             "groceries": [
                 {
-                    "Name": "55",
+                    "Name": "Test 1",
                     "Category": "Groceries",
-                    "Price": 5,
+                    "Price": 123,
                     "Denomination": "EUR",
-                    "Day": 14,
-                    "Date": "14-May-2023"
+                    "Day": 16,
+                    "Date": "16-May-2023"
+                },
+                {
+                    "Name": "Test 2",
+                    "Category": "Groceries",
+                    "Price": 150,
+                    "Denomination": "EUR",
+                    "Day": 16,
+                    "Date": "16-May-2023"
                 }
             ],
-            "hobbies": [],
+            "hobbies": [
+                {
+                    "Name": "Test 3",
+                    "Category": "Hobbies",
+                    "Price": 400,
+                    "Denomination": "EUR",
+                    "Day": 16,
+                    "Date": "16-May-2023"
+                }
+            ],
             "rent": [
                 {
-                    "Name": "gfdsfg",
+                    "Name": "Test 5",
                     "Category": "Rent",
-                    "Price": 4534543,
+                    "Price": 1200,
                     "Denomination": "EUR",
-                    "Day": 14,
-                    "Date": "14-May-2023"
+                    "Day": 16,
+                    "Date": "16-May-2023"
                 }
             ],
-            "other_bills": [],
+            "other_bills": [
+                {
+                    "Name": "Test 4",
+                    "Category": "Other bills",
+                    "Price": 45,
+                    "Denomination": "EUR",
+                    "Day": 16,
+                    "Date": "16-May-2023"
+                }
+            ],
             "travel": [],
             "miscalenious": []
         }

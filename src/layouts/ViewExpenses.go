@@ -72,7 +72,7 @@ func createReport(root fyne.App, home fyne.Window) {
 			folderBrowser.SetContent(container.NewVBox(
 				fileName,
 
-				widget.NewButton("Save", func() {
+				widget.NewButton("Save as csv", func() {
 					window.Resize(fyne.NewSize(600, 400))
 					folderBrowser.Hide()
 					name := fileName.Text
@@ -124,6 +124,55 @@ func createReport(root fyne.App, home fyne.Window) {
 						Popup(root, home, fmt.Sprintf("Succesfully exported the report to %v", w.URI()), false)
 
 						window.Resize(fyne.NewSize(400, 120))
+					}, window)
+
+					save.SetFileName(name)
+					save.Show()
+				}),
+
+				widget.NewButton("Save as excel", func() {
+					window.Resize(fyne.NewSize(600, 400))
+					folderBrowser.Hide()
+
+					name := fileName.Text
+
+					if strings.Contains(name, ".csv") {
+						name = strings.Replace(name, ".csv", ".xlsx", 1)
+					} else if !strings.Contains(name, ".xlsx") {
+						name += ".xlsx"
+					}
+
+					var save *dialog.FileDialog = new(dialog.FileDialog)
+
+					save = dialog.NewFileSave(func(w fyne.URIWriteCloser, e error) {
+						window.Hide()
+						if w == nil {
+							return
+						}
+
+						if e != nil {
+							return
+						}
+
+						data, err := datamng.GetData()
+
+						if err != nil {
+							Popup(root, window, "Unexpected error", true)
+
+							return
+						}
+
+						month := data.GetLastMonth()
+
+						normal, err := report.NormaliseExpenses(month, data.Denomination)
+
+						if err != nil {
+							Popup(root, window, "Unexpected error", true)
+
+							return
+						}
+
+						report.CreateLastMonthExcel(w, normal, data.Budget, data.Denomination, name)
 					}, window)
 
 					save.SetFileName(name)
