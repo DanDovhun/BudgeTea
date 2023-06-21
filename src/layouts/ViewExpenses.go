@@ -5,6 +5,7 @@ import (
 	"BudgeTea/maths"
 	"BudgeTea/report"
 	"fmt"
+	"strconv"
 	"strings"
 	"time"
 
@@ -25,22 +26,151 @@ func pastMonthReport(root fyne.App, home fyne.Window) {
 	title.TextStyle = fyne.TextStyle{Bold: true}
 
 	// Entries for mont and a year
-	month := widget.NewEntry()
-	year := widget.NewEntry()
+	monthInp := widget.NewEntry()
+	yearInp := widget.NewEntry()
 
 	// Set placeholders
-	month.SetPlaceHolder("Month")
-	year.SetPlaceHolder("Year")
+	monthInp.SetPlaceHolder("Month")
+	yearInp.SetPlaceHolder("Year")
 
 	// Fill the window with content
 	window.SetContent(container.NewVBox(
 		title,
-		month,
-		year,
+		monthInp,
+		yearInp,
 
 		// Submits the input
 		widget.NewButton("Submit", func() {
-			Popup(root, window, "To be implemented", false)
+			var month time.Month
+
+			yearInt, err := strconv.ParseInt(yearInp.Text, 64, 10)
+
+			if err != nil {
+				Popup(root, window, err.Error(), true)
+				return
+			}
+
+			year := int(yearInt)
+
+			switch monthInp.Text {
+			case "January", "january", "Jan", "jan", "1", "01":
+				month = 1
+
+			case "February", "february", "Feb", "feb", "2", "02":
+				month = 2
+
+			case "March", "march", "Mar", "mar", "3", "03":
+				month = 3
+
+			case "April", "april", "Apr", "apr", "4", "04":
+				month = 4
+
+			case "May", "may", "5", "05":
+				month = 5
+
+			case "June", "june", "Jun", "jun", "6", "06":
+				month = 6
+
+			case "July", "july", "Jul", "jul", "7", "07":
+				month = 7
+
+			case "August", "august", "Aug", "aug", "8", "08":
+				month = 8
+
+			case "September", "september", "Sep", "sep", "9", "09":
+				month = 9
+
+			case "October", "october", "Oct", "oct", "10":
+				month = 10
+
+			case "November", "november", "Nov", "nov", "11":
+				month = 11
+
+			case "December", "december", "Dec", "dec", "12":
+				month = 12
+
+			default:
+				Popup(root, window, "Invalid month", true)
+				return
+			}
+
+			folderBrowser := root.NewWindow("Export expense report")
+			fileTitle := fmt.Sprintf("%v-%v_Expense_Report", month, year)
+
+			fileName := widget.NewEntry()
+			fileName.SetText(fileTitle)
+			fileName.SetPlaceHolder("File name")
+
+			folderBrowser.SetContent(container.NewVBox(
+				fileName,
+
+				widget.NewButton("Save as CSV", func() {
+					window.Resize(fyne.NewSize(600, 400))
+					folderBrowser.Hide()
+					name := fileName.Text
+
+					if len(name) == 0 {
+						Popup(root, folderBrowser, "Please enter file's name", true)
+
+						return
+					}
+
+					if !strings.Contains(name, ".csv") {
+						name += ".csv"
+					}
+
+					var save *dialog.FileDialog = new(dialog.FileDialog)
+
+					save = dialog.NewFileSave(func(w fyne.URIWriteCloser, e error) {
+						window.Hide()
+						if w == nil {
+							return
+						}
+
+						if e != nil {
+							return
+						}
+
+						data, err := datamng.GetData()
+
+						if err != nil {
+							Popup(root, window, "Unexpected error", true)
+
+							return
+						}
+
+						index, month := data.GetMonth(month, year)
+
+						if index == -1 {
+							Popup(root, window, "Month not found", true)
+
+							return
+						}
+
+						normal, err := report.NormaliseExpenses(month, data.Denomination)
+
+						if err != nil {
+							Popup(root, window, "Unexpected error", true)
+
+							return
+						}
+
+						list := report.CreateOneMonthReport(normal, data.Denomination)
+
+						w.Write([]byte(list))
+
+						Popup(root, home, fmt.Sprintf("Succesfully exported the report to %v", w.URI()), false)
+
+						window.Resize(fyne.NewSize(400, 120))
+					}, window)
+
+					save.SetFileName(name)
+					save.Show()
+				}),
+			))
+
+			folderBrowser.Resize(fyne.NewSize(350, 100))
+			folderBrowser.Show()
 		}),
 	))
 
@@ -130,54 +260,56 @@ func createReport(root fyne.App, home fyne.Window) {
 					save.Show()
 				}),
 
-				widget.NewButton("Save as excel", func() {
-					window.Resize(fyne.NewSize(600, 400))
-					folderBrowser.Hide()
+				/*
+					widget.NewButton("Save as excel", func() {
+						window.Resize(fyne.NewSize(600, 400))
+						folderBrowser.Hide()
 
-					name := fileName.Text
+						name := fileName.Text
 
-					if strings.Contains(name, ".csv") {
-						name = strings.Replace(name, ".csv", ".xlsx", 1)
-					} else if !strings.Contains(name, ".xlsx") {
-						name += ".xlsx"
-					}
-
-					var save *dialog.FileDialog = new(dialog.FileDialog)
-
-					save = dialog.NewFileSave(func(w fyne.URIWriteCloser, e error) {
-						window.Hide()
-						if w == nil {
-							return
+						if strings.Contains(name, ".csv") {
+							name = strings.Replace(name, ".csv", ".xlsx", 1)
+						} else if !strings.Contains(name, ".xlsx") {
+							name += ".xlsx"
 						}
 
-						if e != nil {
-							return
-						}
+						var save *dialog.FileDialog = new(dialog.FileDialog)
 
-						data, err := datamng.GetData()
+						save = dialog.NewFileSave(func(w fyne.URIWriteCloser, e error) {
+							window.Hide()
+							if w == nil {
+								return
+							}
 
-						if err != nil {
-							Popup(root, window, "Unexpected error", true)
+							if e != nil {
+								return
+							}
 
-							return
-						}
+							data, err := datamng.GetData()
 
-						month := data.GetLastMonth()
+							if err != nil {
+								Popup(root, window, "Unexpected error", true)
 
-						normal, err := report.NormaliseExpenses(month, data.Denomination)
+								return
+							}
 
-						if err != nil {
-							Popup(root, window, "Unexpected error", true)
+							month := data.GetLastMonth()
 
-							return
-						}
+							normal, err := report.NormaliseExpenses(month, data.Denomination)
 
-						report.CreateLastMonthExcel(w, normal, data.Budget, data.Denomination, name)
-					}, window)
+							if err != nil {
+								Popup(root, window, "Unexpected error", true)
 
-					save.SetFileName(name)
-					save.Show()
-				}),
+								return
+							}
+
+							report.CreateLastMonthExcel(w, normal, data.Budget, data.Denomination, name)
+						}, window)
+
+						save.SetFileName(name)
+						save.Show()
+					}),
+				*/
 			))
 
 			folderBrowser.Resize(fyne.NewSize(350, 100))

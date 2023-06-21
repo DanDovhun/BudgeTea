@@ -1,0 +1,35 @@
+{
+    "budget": 500,
+    "denomination": "EUR",
+    "months": [
+        {
+            "budget": 500,
+            "total_spending": 25.98,
+            "year": 2023,
+            "month": 6,
+            "groceries": [],
+            "hobbies": [],
+            "rent": [],
+            "other_bills": [
+                {
+                    "Name": "porno stranka",
+                    "Category": "Other bills",
+                    "Price": 12.99,
+                    "Denomination": "EUR",
+                    "Day": 17,
+                    "Date": "17-June-2023"
+                },
+                {
+                    "Name": "porno stranka",
+                    "Category": "Other bills",
+                    "Price": 12.99,
+                    "Denomination": "EUR",
+                    "Day": 17,
+                    "Date": "17-June-2023"
+                }
+            ],
+            "travel": [],
+            "miscalenious": []
+        }
+    ]
+}
