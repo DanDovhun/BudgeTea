@@ -49,6 +49,16 @@ func (data Data) GetLastMonth() Month {
 	return data.Months[len(data.Months)-1]
 }
 
+func (data Data) GetMonth(month time.Month, year int) (int, Month) {
+	for i, j := range data.Months {
+		if j.Moon == month && j.Year == year {
+			return i, j
+		}
+	}
+
+	return -1, Month{}
+}
+
 // Sets current budget
 func (data *Data) SetBudget(budget float64) {
 	data.Budget = budget

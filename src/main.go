@@ -46,6 +46,8 @@ func main() { // Main function
 	root := app.New()                  // Create an application instance
 	home := root.NewWindow("BudgeTea") // Create a home window
 
+	home.SetFixedSize(true) // Make the window
+
 	if notConnected != nil {
 		layouts.Popup(root, home, "Internet connection not found.\n\nPlease make sure to be connected to the internet \nto get full BudgeTea experience", true)
 	}
@@ -60,6 +62,7 @@ func main() { // Main function
 		widget.NewButton("Add an Expense", func() { // Create a button that switches to ExpenseAdditionWindow
 			layouts.ExpenseAdditionWindow(root, home) // Replace home window with the new one
 		}),
+
 		widget.NewButton("Expense Report", func() { // Create a button that switches to ViewExpensesLayout
 			layouts.ViewExpensesLayout(root, home) // Switch to the new layout
 		}),
