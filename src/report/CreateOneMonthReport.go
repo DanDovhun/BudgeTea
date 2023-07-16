@@ -78,28 +78,30 @@ func CreateOneMonthReport(month datamng.Month, currency string) string {
 		hobbySpending += i.Price
 	}
 
-	// Add other bills
+	// Add Hobbies
 	spending += fmt.Sprintf("Hobbies:;%v %v\n", hobbySpending, currency) + hobbies + "\n\n"
 
 	// Adds travel
-	hobbies = "Title;Cost;Date\n"
+	travel = "Title;Cost;Date\n"
 	for _, i := range month.Travel {
 		travel += fmt.Sprintf("%v;%v %v; %v\n", i.Name, i.Price, i.Denomination, i.Date)
 		travelSpending += i.Price
 	}
 
-	// Add other bills
-	spending += fmt.Sprintf("Travel:;%v %v\n", travelSpending, currency) + hobbies + "\n\n"
+	// Add Travel
+	spending += fmt.Sprintf("Travel:;%v %v\n", travelSpending, currency) + travel + "\n\n"
 
-	// Adds travel
+	// Adds Miscelanious
 	misc = "Title;Cost;Date\n"
 	for _, i := range month.Miscelanious {
 		misc += fmt.Sprintf("%v;%v %v; %v\n", i.Name, i.Price, i.Denomination, i.Date)
 		miscSpending += i.Price
 	}
 
+	fmt.Println(misc)
+
 	// Add other bills
-	spending += fmt.Sprintf("Miscelanious:;%v %v\n", travelSpending, currency) + hobbies + "\n\n"
+	spending += fmt.Sprintf("Miscelanious:;%v %v\n", miscSpending, currency) + misc + "\n\n"
 
 	return spending
 }

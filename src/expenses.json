@@ -4,33 +4,59 @@
     "months": [
         {
             "budget": 5000,
-            "total_spending": 4534548,
+            "total_spending": 445,
             "year": 2023,
             "month": 5,
             "groceries": [
                 {
-                    "Name": "55",
+                    "Name": "Test 1",
                     "Category": "Groceries",
-                    "Price": 5,
+                    "Price": 120,
                     "Denomination": "EUR",
-                    "Day": 14,
-                    "Date": "14-May-2023"
-                }
-            ],
-            "hobbies": [],
-            "rent": [
+                    "Day": 15,
+                    "Date": "15-May-2023"
+                },
                 {
-                    "Name": "gfdsfg",
-                    "Category": "Rent",
-                    "Price": 4534543,
+                    "Name": "Test 4",
+                    "Category": "Groceries",
+                    "Price": 45,
                     "Denomination": "EUR",
-                    "Day": 14,
-                    "Date": "14-May-2023"
+                    "Day": 15,
+                    "Date": "15-May-2023"
                 }
             ],
+            "hobbies": [
+                {
+                    "Name": "Test 5",
+                    "Category": "Hobbies",
+                    "Price": 90,
+                    "Denomination": "EUR",
+                    "Day": 15,
+                    "Date": "15-May-2023"
+                }
+            ],
+            "rent": [],
             "other_bills": [],
-            "travel": [],
-            "miscalenious": []
+            "travel": [
+                {
+                    "Name": "Test 2",
+                    "Category": "Travel",
+                    "Price": 145,
+                    "Denomination": "EUR",
+                    "Day": 15,
+                    "Date": "15-May-2023"
+                }
+            ],
+            "miscalenious": [
+                {
+                    "Name": "Test 3",
+                    "Category": "Miscelanious",
+                    "Price": 45,
+                    "Denomination": "EUR",
+                    "Day": 15,
+                    "Date": "15-May-2023"
+                }
+            ]
         }
     ]
 }
