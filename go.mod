@@ -2,7 +2,10 @@ module BudgeTea
 
 go 1.20
 
-require fyne.io/fyne/v2 v2.3.0
+require (
+	fyne.io/fyne/v2 v2.3.0
+	github.com/xuri/excelize/v2 v2.7.1
+)
 
 require (
 	fyne.io/systray v1.10.1-0.20230403195833-7dc3c09283d6 // indirect
@@ -28,7 +31,6 @@ require (
 	github.com/stretchr/testify v1.8.0 // indirect
 	github.com/tevino/abool v1.2.0 // indirect
 	github.com/xuri/efp v0.0.0-20220603152613-6918739fd470 // indirect
-	github.com/xuri/excelize/v2 v2.7.1 // indirect
 	github.com/xuri/nfp v0.0.0-20220409054826-5e722a1d9e22 // indirect
 	github.com/yuin/goldmark v1.4.13 // indirect
 	golang.org/x/crypto v0.8.0 // indirect
