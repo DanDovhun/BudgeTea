@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// Data struct
+// Data struct.
 // The database is loaded into this struct
 type Data struct {
 	Budget       float64 `json:"budget"`
@@ -15,6 +15,7 @@ type Data struct {
 	Months       []Month `json:"months"`
 }
 
+// Fetches data from the json files
 func GetData() (Data, error) {
 	data, err := os.Open("expenses.json") // Open the json file
 	var months Data                       // The loaded data will be stored here
@@ -45,10 +46,12 @@ func (data Data) FindMonthByYear(month time.Month, year int) int {
 	return -1 // If not found, return -1
 }
 
+// Returns the most recent month
 func (data Data) GetLastMonth() Month {
 	return data.Months[len(data.Months)-1]
 }
 
+// Returns expenses from a certain month
 func (data Data) GetMonth(month time.Month, year int) (int, Month) {
 	for i, j := range data.Months {
 		if j.Moon == month && j.Year == year {

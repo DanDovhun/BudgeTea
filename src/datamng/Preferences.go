@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// Write the new budget in the database
 func SetBudget(budget float64) error {
 	data, err := os.Open("expenses.json") // Open the json file
 	var months Data                       // The loaded data will be stored here
@@ -44,6 +45,7 @@ func SetBudget(budget float64) error {
 	return nil
 }
 
+// Write the current currency in the database
 func SetCurrency(currency string) error {
 	data, err := os.Open("expenses.json") // Open the json file
 	var months Data                       // The loaded data will be stored here
@@ -77,6 +79,7 @@ func SetCurrency(currency string) error {
 	return nil
 }
 
+// Fetches the preferred currency
 func GetCurrency() (string, error) {
 	var currency string
 	data, err := os.Open("expenses.json") // Open the json file

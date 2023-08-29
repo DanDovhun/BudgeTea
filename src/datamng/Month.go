@@ -2,11 +2,10 @@ package datamng
 
 import (
 	"BudgeTea/forex"
-	"fmt"
 	"time"
 )
 
-// Month struct
+// Stores information about month's spending
 type Month struct {
 	// Months budget and
 	Budget        float64 `json:"budget"`
@@ -25,6 +24,7 @@ type Month struct {
 	Miscelanious []Expense `json:"miscalenious"`
 }
 
+// Month Constructor
 func NewMonth(budget float64) Month {
 	currentYear, currentMonth, _ := time.Now().Date() // Get current year and month
 
@@ -52,8 +52,6 @@ func (month *Month) SetBudget(budget float64) {
 // When changing prefered currency, the spending will be changed to the value of the new one
 func (month *Month) ChangeSpendingToCurrency(old, new string) error {
 	spending, err := forex.Convert(old, new, month.TotalSpending) // Convert spending to the new currency
-
-	fmt.Printf(fmt.Sprintf("%v", spending))
 
 	if err != nil { // If error happens
 		return err // ret7urn error

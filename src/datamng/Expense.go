@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// Stores information about an expense
 type Expense struct {
 	Name         string
 	Category     string
@@ -111,6 +112,7 @@ func (ex Expense) Add(expense Expense) error {
 	return nil
 }
 
+// Sets the cost of the expense
 func (ex *Expense) SetPrice(price float64) {
 	ex.Price = price
 }

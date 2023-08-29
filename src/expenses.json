@@ -1,10 +1,10 @@
 {
-    "budget": 500,
-    "denomination": "EUR",
+    "budget": 5000,
+    "denomination": "SEK",
     "months": [
         {
             "budget": 5000,
-            "total_spending": 445,
+            "total_spending": 5280.637,
             "year": 2023,
             "month": 5,
             "groceries": [
@@ -55,6 +55,36 @@
                     "Denomination": "EUR",
                     "Day": 15,
                     "Date": "15-May-2023"
+                }
+            ]
+        },
+        {
+            "budget": 5000,
+            "total_spending": 16200,
+            "year": 2023,
+            "month": 8,
+            "groceries": [],
+            "hobbies": [],
+            "rent": [
+                {
+                    "Name": "Rent",
+                    "Category": "Rent",
+                    "Price": 1200,
+                    "Denomination": "SEK",
+                    "Day": 17,
+                    "Date": "17-August-2023"
+                }
+            ],
+            "other_bills": [],
+            "travel": [],
+            "miscalenious": [
+                {
+                    "Name": "Laptop",
+                    "Category": "Miscelanious",
+                    "Price": 15000,
+                    "Denomination": "SEK",
+                    "Day": 17,
+                    "Date": "17-August-2023"
                 }
             ]
         }
