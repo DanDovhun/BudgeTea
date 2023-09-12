@@ -11,9 +11,9 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/driver/desktop"
-	"fyne.io/fyne/v2/internal"
 	"fyne.io/fyne/v2/internal/driver/common"
 	"fyne.io/fyne/v2/internal/painter/gl"
+	"fyne.io/fyne/v2/internal/scale"
 
 	"github.com/fyne-io/glfw-js"
 )
@@ -107,6 +107,10 @@ func (w *window) CenterOnScreen() {
 	w.centered = true
 }
 
+func (w *window) SetOnDropped(dropped func(pos fyne.Position, items []fyne.URI)) {
+	// FIXME: not implemented yet
+}
+
 func (w *window) doCenterOnScreen() {
 	// FIXME: no meaning for defining center on screen in WebGL
 }
@@ -185,7 +189,7 @@ func (w *window) setCustomCursor(rawCursor *Cursor, isCustomCursor bool) {
 }
 
 func (w *window) mouseMoved(_ *glfw.Window, xpos, ypos float64) {
-	w.processMouseMoved(xpos, ypos)
+	w.processMouseMoved(w.scaleInput(xpos), w.scaleInput(ypos))
 }
 
 func (w *window) mouseClicked(viewport *glfw.Window, btn glfw.MouseButton, action glfw.Action, mods glfw.ModifierKey) {
@@ -474,8 +478,8 @@ func (w *window) rescaleOnMain() {
 	//	if w.fullScreen {
 	w.width, w.height = w.viewport.GetSize()
 	scaledFull := fyne.NewSize(
-		internal.UnscaleInt(w.canvas, w.width),
-		internal.UnscaleInt(w.canvas, w.height))
+		scale.ToFyneCoordinate(w.canvas, w.width),
+		scale.ToFyneCoordinate(w.canvas, w.height))
 	w.canvas.Resize(scaledFull)
 	return
 	//	}

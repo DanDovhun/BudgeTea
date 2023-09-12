@@ -1,7 +1,7 @@
 /*
 * Name: BudgeTea
 * Author: Daniel Dovhun
-* Description: A simple budget managing tool built with GoLang and Fyne.io
+* Description: A simple budget managing tool written in fyne.io
  */
 
 package main
