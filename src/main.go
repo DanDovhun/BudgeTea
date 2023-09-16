@@ -11,6 +11,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 
 	"BudgeTea/datamng"
 	"BudgeTea/forex"
@@ -42,12 +43,32 @@ func fillup() {
 	}
 }
 
+func ChangeMonth(root fyne.App, window fyne.Window) {
+	data, err := datamng.GetData()
+
+	if err != nil {
+		layouts.Popup(root, window, "Cannot access data", true)
+
+		return
+	}
+
+	lastMonth := data.GetLastMonth()
+	currentMonth := time.Now().Month()
+
+	if lastMonth.Moon == currentMonth {
+		return
+	}
+
+	data.NewMonth(datamng.NewMonth(data.Budget))
+}
+
 func main() { // Main function
-	fillup()
 	_, notConnected := forex.Convert("SEK", "USD", 100)
 
 	root := app.New()                  // Create an application instance
 	home := root.NewWindow("BudgeTea") // Create a home window
+
+	ChangeMonth(root, home)
 
 	home.SetFixedSize(true) // Make the window
 

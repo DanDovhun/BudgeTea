@@ -33,6 +33,11 @@ func GetData() (Data, error) {
 	return months, nil
 }
 
+// Adds a new month to db
+func AddMonth() {
+
+}
+
 // Searches for a specific month
 func (data Data) FindMonthByYear(month time.Month, year int) int {
 	// Iterate through months
@@ -60,6 +65,11 @@ func (data Data) GetMonth(month time.Month, year int) (int, Month) {
 	}
 
 	return -1, Month{}
+}
+
+// Adds a new month
+func (data *Data) NewMonth(month Month) {
+	data.Months = append(data.Months, month)
 }
 
 // Sets current budget
